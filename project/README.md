@@ -27,3 +27,4 @@ We'll use the Million Song dataset. We'll simply download it, remove the Data fo
 
 # Questions for TAs
 -Should we focus more on only one/two questions ?    
+-As there doesn't seem to be tags specific to tracks, we'll use the artist tags for correlations. Would it be better to look at the mean "hotness" of each artist or apply the tags to the tracks and work with them ?     
