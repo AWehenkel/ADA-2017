@@ -1,4 +1,4 @@
-# Title
+# Logic in song - SuperHit, story and pattern study
 
 # Abstract
 >What makes a great song? It’s a big question, and one that has been written about endlessly in an attempt to unravel the “formula” for creating a world dominating smash hit record. Sure, there are some basic rules and if you were to examine a handful of the most successful or popular songs of the last four decades, they do have certain things in common. Intro, verse, bridge, chorus, verse, bridge, chorus, middle 8, chorus, chorus etc springs to mind! <a  href="http://www.makeitinmusic.com/what-makes-a-great-song/">makeitinmusic</a>    
