@@ -13,6 +13,7 @@ What makes a good song (find correlations) ?
 Which country produces the "best" / "worst" songs ?    
 Are there differences between countries ?     
 Are there correlations between year of release and ratings ?
+
 Are there recurrent patterns depending on the period of the year ?
 
 # Dataset
