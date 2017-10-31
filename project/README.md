@@ -26,4 +26,4 @@ We'll use the Million Song dataset. We'll simply download it, remove the Data fo
 | Week 4 | ??? |
 
 # Questions for TAs
--???
+-Should we focus more on only one/two questions ?    
