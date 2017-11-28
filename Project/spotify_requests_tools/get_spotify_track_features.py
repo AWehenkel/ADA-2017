@@ -46,12 +46,12 @@ def insert_in_csv(writer, feature_track, song_ids):
 
 if __name__ == '__main__':
 
-	client_id = "635dd6cc66844154a9d70db7d8afe8e9"
-	secret_id = "446a707bbc394f67ba2e3f1d9df65735"
+	client_id = "REDACTED"
+	secret_id = "REDACTED"
 
 	grant_type = 'client_credentials'
 
-	base64_key = "NjM1ZGQ2Y2M2Njg0NDE1NGE5ZDcwZGI3ZDhhZmU4ZTk6NDQ2YTcwN2JiYzM5NGY2N2JhMmUzZjFkOWRmNjU3MzU="
+	base64_key = "REDACTED"
 
 	r = requests.post("https://accounts.spotify.com/api/token", data={'grant_type': grant_type}, auth = (client_id,secret_id))
 		#headers={'Authorization':base64_key})
