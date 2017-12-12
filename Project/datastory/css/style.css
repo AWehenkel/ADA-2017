@@ -7,11 +7,23 @@ html {
 .intro {
     background-color: white;
     height: 100%;
-    padding-top: 5%;
+}
+
+.intro_title {
+    background-color: white;
+    height: 20%;
 }
 
 .intro .left {
     visibility: hidden;
+}
+
+.reveal_left {
+    width: 90%;
+}
+
+.reveal_right {
+    width: 90%;
 }
 
 h1 {
@@ -24,3 +36,15 @@ h2 {
     padding: 30px 0px;
 }
 
+h3 {
+    text-align: center;
+    padding: 15px 0px;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+}
