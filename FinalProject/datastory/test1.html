@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Logic in song - SuperHit, story and pattern study</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon">
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <script type="text/javascript" src="js/d3.min.js"></script>
+    <script>
+    (function() {
+
+        var config = {
+            viewFactor: 0.15,
+            duration: 1000,
+            reset: true,
+        }
+
+        window.sr = new ScrollReveal(config)
+    })()
+    </script>
+</head>
+
+<body>
+    <div class="intro container row">
+        <div class="reveal_top col s12">
+            <h1> Logic in song - SuperHit, story and pattern study </h1>
+            <div class="card-panel grey lighten-4 grey-text text-grey">
+                <p class="color">
+                    ''What makes a great song? It’s a big question, and one that has been written about endlessly in an attempt to unravel the “formula” for creating a world dominating smash hit record. Sure, there are some basic rules and if you were to examine a handful of the most successful or popular songs of the last four decades, they do have certain things in common. Intro, verse, bridge, chorus, verse, bridge, chorus, middle 8, chorus, chorus etc springs to mind!''</p>
+                <a href="http://www.makeitinmusic.com/what-makes-a-great-song/">makeitinmusic</a>
+            </div>
+            <p>
+                In this project, we decided to investigate what it means to be a "good" song. With the help of the <a href="https://labrosa.ee.columbia.edu/millionsong/">Million Song Dataset</a>, we looked into the various components of what is a song and what you could do to create a good song. As one can suppose, we were confronted with multiple issues as the problem isn't trivial. The whole problem is linked to everyone subjectivity, thus any results we get are debatable.
+            </p>
+            <!--p>
+                We'll analyze a million songs metadata to extract what makes a song "hot", or "danceable". We'll look at different factors, like the loudness, the type of songs (tags), the duration, energy, tempo, etc. We'll also see which country produces the "best" songs, and what is the dominant type in each one. Moreover, we'll see if songs have changed a lot with the years, and if older songs are as appreciated as current ones. We'll obviously use the Million Song dataset for this. The main goal, in short is to learn more about music in general.
+            </p-->
+        </div>
+    </div>
+    <div class="intro row">
+        <div class="container reveal_top col s12">
+            <h2> Plan </h2>
+        </div>
+        <div class="container reveal_left left col s4">
+            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+        </div>
+        <div class="container reveal_right right col s7">
+            <div class="col s1"></div>
+            <ul class="collapsible popout col s8" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header">The Data</div>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="#data1"> What we have </a></li>
+                            <li><a href="#data2"> What we lack </a></li>
+                            <li><a href="#data3"> Spotify to the rescue </a></li>
+                            <li><a href="#data4"> What we'll definitely lack </a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Feature Analysis</div>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="#feature1"> What we have </a></li>
+                            <li><a href="#feature2"> What we lack </a></li>
+                            <li><a href="#feature3"> Spotify to the rescue </a></li>
+                            <li><a href="#feature4"> What we'll definitely lack </a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Genre Analysis</div>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="#genre1"> What we have </a></li>
+                            <li><a href="#genre2"> What we lack </a></li>
+                            <li><a href="#genre3"> Spotify to the rescue </a></li>
+                            <li><a href="#genre4"> What we'll definitely lack </a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Year Analysis</div>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="#year1"> What we have </a></li>
+                            <li><a href="#year2"> What we lack </a></li>
+                            <li><a href="#year3"> Spotify to the rescue </a></li>
+                            <li><a href="#year4"> What we'll definitely lack </a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Conclusion</div>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="#conclusion1"> What we have </a></li>
+                            <li><a href="#conclusion2"> What we lack </a></li>
+                            <li><a href="#conclusion3"> Spotify to the rescue </a></li>
+                            <li><a href="#conclusion4"> What we'll definitely lack </a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div class="col s3"></div>
+        </div>
+    </div>
+    <!-- DATA SECTION START -->
+    <div id="data0" class="intro_title row">
+        <div class="container reveal_top col s12">
+            <h2> The Data </h2>
+        </div>
+    </div>
+    <div id="data1" class="intro row">
+        <div class="container reveal_top col s12">
+            <h3>What we have</h3>
+        </div>
+        <div class="container reveal_left col s6">
+            <img src="figures/millionsong2.jpg" / />
+        </div>
+        <div class="container reveal_right col s4">
+            <p>
+                The original dataset comes from the <a href="https://labrosa.ee.columbia.edu/millionsong/">Million Song Dataset</a> (aka MSD). It contains the metadatas (like the artist, its hotttnesss, danceability, energy, year, duration , ...) and the analyze (fade out/in time, timbres, confidence, ... throughout a song) of a million songs.
+            </p>
+        </div>
+    </div>
+    <div id="data2" class="intro row">
+        <div class="container reveal_top">
+            <h3>What we lack</h3>
+        </div>
+        <div class="col s1"></div>
+        <div class="container reveal_left col s4">
+            <p>
+                Unfortunately, MSD lacks plenty of data.
+            </p>
+            <p>
+                First of all, we totally lack the genre of each song. This is a problem, because as one can think, this or that property could have a huge impact following the genre (the loudness for electronic music, the tempo in Blues or Latin music, ...).
+            </p>
+            <p>
+                Next, we lack data that are supposed to be here. As you can see in the table to the left, energy and danceability are always at 0.0, which following the <a href="https://labrosa.ee.columbia.edu/millionsong/pages/example-track-description">columns description</a> of MSD mean that the song isn't analyzed. However, it doesn't make sense to think that no song is analyzed (why add the column in this case). It specify that this attributs come from the Echo Nest API, but bad luck, this API is <a href="https://developer.spotify.com/spotify-echo-nest-api/">dead</a> since 2016. Even more worriyng, more than a third of the song doesn't have a year.
+            </p>
+                   </div>
+        <div class="col s1"></div>
+        <div class="container reveal_right col s5">
+            <table border="1" class="dataframe">
+                <thead>
+                    <tr style="text-align: right;">
+                        <th></th>
+                        <th>danceability</th>
+                        <th>duration</th>
+                        <th>energy</th>
+                        <th>loudness</th>
+                        <th>tempo</th>
+                        <th>year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>mean</th>
+                        <td>0.0</td>
+                        <td>249.50</td>
+                        <td>0.0</td>
+                        <td>-10.12</td>
+                        <td>123.88</td>
+                        <td>1031.86</td>
+                    </tr>
+                    <tr>
+                        <th>std</th>
+                        <td>0.0</td>
+                        <td>126.22</td>
+                        <td>0.0</td>
+                        <td>5.19</td>
+                        <td>35.05</td>
+                        <td>998.68</td>
+                    </tr>
+                    <tr>
+                        <th>min</th>
+                        <td>0.0</td>
+                        <td>0.31</td>
+                        <td>0.0</td>
+                        <td>-58.17</td>
+                        <td>0.00</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>25%</th>
+                        <td>0.0</td>
+                        <td>180.74</td>
+                        <td>0.0</td>
+                        <td>-12.67</td>
+                        <td>97.99</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>50%</th>
+                        <td>0.0</td>
+                        <td>228.85</td>
+                        <td>0.0</td>
+                        <td>-8.96</td>
+                        <td>122.08</td>
+                        <td>1970</td>
+                    </tr>
+                    <tr>
+                        <th>75%</th>
+                        <td>0.0</td>
+                        <td>289.93</td>
+                        <td>0.0</td>
+                        <td>-6.38</td>
+                        <td>144.08</td>
+                        <td>2002</td>
+                    </tr>
+                    <tr>
+                        <th>max</th>
+                        <td>0.0</td>
+                        <td>3034.90</td>
+                        <td>0.0</td>
+                        <td>4.31</td>
+                        <td>302.30</td>
+                        <td>2011</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="data3" class="intro row">
+        <div class="container reveal_top col s12">
+            <h3>Spotify to the rescue</h3>
+        </div>
+        <div class="container reveal_left col s6">
+            <img src="figures/spotifyAPI.jpg">
+        </div>
+        <div class="container reveal_right col s5">
+            <p>
+                The original dataset comes from the <a href="https://labrosa.ee.columbia.edu/millionsong/">Million Song Dataset</a>. It contains the metadatas (like the artist, its hotttnesss, danceability, energy, year, duration , ...) and the analyze (fade out/in time, timbres, confidence, ... throughout a song) of a million songs.
+            </p>
+        </div>
+    </div>
+    <!-- DATA SECTION END -->
+    <!-- FEATURE SECTION START -->
+    <div id="feature1" class="intro row">
+        <div class="container reveal_top col s12">
+            <h2> Feature Analysis </h2>
+        </div>
+        <div class="container reveal_left col s6">
+            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+        </div>
+        <div class="container reveal_right col s6">
+            <p>
+                "The Logical Song" was written primarily by Roger Hodgson, the lyric based on his experience of being sent away to boarding school for ten years.[4] It was a very personal song for Hodgson; he had worked on the song during soundchecks, and completed the lyrics and arrangement six months before proposing it to the band for the album.[5] In 1980, Hodgson was honored with the Ivor Novello Award from The British Academy of Composers and Songwriters for "The Logical Song" being named the best song both musically and lyrically. To this day, "The Logical Song" also has the distinction of being one of the most quoted lyrics in schools.[6][5] Hodgson has said of the song’s meaning: “The Logical Song” was born from my questions about what really matters in life. Throughout childhood we are taught all these ways to be and yet we are rarely told anything about our true self. We are taught how to function outwardly, but not guided to who we are inwardly. We go from the innocence and wonder of childhood to the confusion of adolescence that often ends in the cynicism and disillusionment of adulthood. In The Logical Song, the burning question that came down to its rawest place was 'please tell me who I am,' and that's basically what the song is about. I think this eternal question continues to hit such a deep chord in people around the world and why it stays so meaningful."[7][8][9]:3 The lyrics are a condemnation of an education system focused on categorical jargon as opposed to knowledge and sensitivity.[10] The lyrics are notable for their use of consonance, with a repetition of the '-ical/ -able' endings of multiple adjectives. Supertramp co-founder Rick Davies wrote the vocal harmony on the second chorus.[11] The song makes use of keyboards, castanets, and an instrumental section.[2] Among the contemporary sound effects in this song are the 'tackled' sound from a Mattel electronic football game[11] and the Trouble "Pop-o-matic" bubble – both popular at the time this song was released.
+            </p>
+        </div>
+    </div>
+    <!-- FEATURE SECTION END -->
+    <!-- GENRE SECTION START -->
+    <div id="genre1" class="intro row">
+        <div class="container reveal_top col s12">
+            <h2> Genre Analysis </h2>
+        </div>
+        <div class="container reveal_left col s6 genre_primary" id="genre_primary_container" style='overflow-y: scroll; height:80%;'>
+            <h2 id = "genre_title"></h2>
+            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+            <p>
+              Observation
+            </p>
+        </div>
+        <div class="container reveal_right col s6">
+            <svg class ='reveal_genres'width="960" height="640"></svg>
+        </div>
+    </div>
+    <!-- GENRE SECTION END -->
+    <!-- YEAR SECTION START -->
+    <div id="year1" class="intro row">
+        <div class="container reveal_top col s12">
+            <h2> Year Analysis </h2>
+        </div>
+        <div class="container reveal_left col s6">
+            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+        </div>
+        <div class="container reveal_right col s6">
+            <p>
+                "The Logical Song" was written primarily by Roger Hodgson, the lyric based on his experience of being sent away to boarding school for ten years.[4] It was a very personal song for Hodgson; he had worked on the song during soundchecks, and completed the lyrics and arrangement six months before proposing it to the band for the album.[5] In 1980, Hodgson was honored with the Ivor Novello Award from The British Academy of Composers and Songwriters for "The Logical Song" being named the best song both musically and lyrically. To this day, "The Logical Song" also has the distinction of being one of the most quoted lyrics in schools.[6][5] Hodgson has said of the song’s meaning: “The Logical Song” was born from my questions about what really matters in life. Throughout childhood we are taught all these ways to be and yet we are rarely told anything about our true self. We are taught how to function outwardly, but not guided to who we are inwardly. We go from the innocence and wonder of childhood to the confusion of adolescence that often ends in the cynicism and disillusionment of adulthood. In The Logical Song, the burning question that came down to its rawest place was 'please tell me who I am,' and that's basically what the song is about. I think this eternal question continues to hit such a deep chord in people around the world and why it stays so meaningful."[7][8][9]:3 The lyrics are a condemnation of an education system focused on categorical jargon as opposed to knowledge and sensitivity.[10] The lyrics are notable for their use of consonance, with a repetition of the '-ical/ -able' endings of multiple adjectives. Supertramp co-founder Rick Davies wrote the vocal harmony on the second chorus.[11] The song makes use of keyboards, castanets, and an instrumental section.[2] Among the contemporary sound effects in this song are the 'tackled' sound from a Mattel electronic football game[11] and the Trouble "Pop-o-matic" bubble – both popular at the time this song was released.
+            </p>
+        </div>
+    </div>
+    <!-- YEAR SECTION END -->
+    <!-- CONCLUSION SECTION START -->
+    <div id="conclusion1" class="intro row">
+        <div class="container reveal_top col s12">
+            <h2> Conclusion </h2>
+        </div>
+        <div class="container reveal_left col s6">
+            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+        </div>
+        <div class="container reveal_right col s6">
+            <p>
+                "The Logical Song" was written primarily by Roger Hodgson, the lyric based on his experience of being sent away to boarding school for ten years.[4] It was a very personal song for Hodgson; he had worked on the song during soundchecks, and completed the lyrics and arrangement six months before proposing it to the band for the album.[5] In 1980, Hodgson was honored with the Ivor Novello Award from The British Academy of Composers and Songwriters for "The Logical Song" being named the best song both musically and lyrically. To this day, "The Logical Song" also has the distinction of being one of the most quoted lyrics in schools.[6][5] Hodgson has said of the song’s meaning: “The Logical Song” was born from my questions about what really matters in life. Throughout childhood we are taught all these ways to be and yet we are rarely told anything about our true self. We are taught how to function outwardly, but not guided to who we are inwardly. We go from the innocence and wonder of childhood to the confusion of adolescence that often ends in the cynicism and disillusionment of adulthood. In The Logical Song, the burning question that came down to its rawest place was 'please tell me who I am,' and that's basically what the song is about. I think this eternal question continues to hit such a deep chord in people around the world and why it stays so meaningful."[7][8][9]:3 The lyrics are a condemnation of an education system focused on categorical jargon as opposed to knowledge and sensitivity.[10] The lyrics are notable for their use of consonance, with a repetition of the '-ical/ -able' endings of multiple adjectives. Supertramp co-founder Rick Davies wrote the vocal harmony on the second chorus.[11] The song makes use of keyboards, castanets, and an instrumental section.[2] Among the contemporary sound effects in this song are the 'tackled' sound from a Mattel electronic football game[11] and the Trouble "Pop-o-matic" bubble – both popular at the time this song was released.
+            </p>
+        </div>
+    </div>
+    <!-- CONCLUSION SECTION END -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    var simulation = d3.forceSimulation()
+        .force("link", d3.forceLink().id(function(d) { return d.id; }))
+        .force("charge", d3.forceManyBody().strength(-2000))
+        .force("center", d3.forceCenter(width / 2 - 120, height / 2 - 20));
+
+
+    d3.json("data/genre_graph.json", function(error, graph) {
+      if (error) throw error;
+
+      graph.links.forEach(function(d){
+        d.source = d.source_id;
+        d.target = d.target_id;
+      });
+
+      var link = svg.append("g")
+                    .style("stroke", "#aaa")
+                    .selectAll("line")
+                    .data(graph.links)
+                    .enter().append("line");
+
+      var node = svg.append("g")
+                .attr("class", "nodes")
+      .selectAll("circle")
+                .data(graph.nodes)
+      .enter().append("circle")
+              .attr("r", 6)
+              .call(d3.drag()
+                  .on("start", dragstarted)
+                  .on("drag", dragged)
+                  .on("end", dragended));
+
+      var label = svg.append("g")
+          .attr("class", "labels")
+          .selectAll("text")
+          .data(graph.nodes)
+          .enter().append("text")
+            .attr("class", "label")
+            .text(function(d) { return d.genre; });
+
+      simulation.nodes(graph.nodes).on("tick", ticked);
+
+      function ticked() {
+        link
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; })
+            .attr("stroke-width", function(d) { return d.stroke_width; })
+            .style("opacity", .5)
+            .attr("class", function(d) { return "genre"+d.source.id + " genre" + d.target.id; })
+            .on("mouseover", function(){this.style.opacity=1;})
+            .on("mouseout", function(){this.style.opacity=.5;});
+
+        node
+             .attr("r", function(d) { return d.radius*2; })
+             .style("fill", function(d){return d.color;} )
+             .style("stroke", "#969696")
+             .style("stroke-width", "1px")
+             .on("mouseover", function(d) {this.style.cursor='pointer';})
+             .on("mouseout", function(d) {this.style.cursor='cursor';})
+             .on("click", function(d) { clickOnGenreNode(d); })
+             .attr("cx", function (d) { return d.x+6; })
+             .attr("cy", function(d) { return d.y-6; });
+
+        label
+            .attr("x", function(d) { return d.x - d.genre.length*1.5; })
+                .attr("y", function (d) { return d.y; })
+                .style("font-size", "10px").style("fill", "black");
+      }
+      simulation.force("link").links(graph.links);
+    });
+
+    function dragstarted(d) {
+      if (!d3.event.active) simulation.alphaTarget(0.3).restart()
+      //simulation.fix(d);
+    }
+
+    var delay = ( function() {
+        var timer = 0;
+        return function(callback, ms) {
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+    prev_node = null;
+    function clickOnGenreNode(d){
+      if(prev_node != null){
+        var links = document.getElementsByClassName('genre' + prev_node.id);
+        for(i=0; i < links.length; i++) {
+          links[i].style.stroke = "#aaa";
+        }
+        step = 200;
+        xt = d.x;
+        yt = d.y;
+        i = 0;
+        moveNode(i, step, prev_node.x, prev_node.y, d.x, d.y, prev_node);
+      }
+
+      prev_node = d;
+      var links = document.getElementsByClassName('genre' + d.id);
+      for(i=0; i < links.length; i++) {
+        links[i].style.stroke = d.color;
+      }
+      document.getElementById('genre_title').innerHTML = d.genre;
+      document.getElementById('genre_primary_container').style.backgroundColor = d.color;
+      var oldBGColor = $('#genre_primary_container').css('backgroundColor');
+      var newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+.5+')');
+      $('#genre_primary_container').css('backgroundColor', newBGColor);
+
+      step = 200;
+      x_init = d.x;
+      y_init = d.y;
+      i = 0;
+      simulation.force("center", null);
+      moveNode(i, step, x_init, y_init, width/2 - 120, height / 2 - 20, d);
+    }
+
+    function moveNode (i, step, x0, y0, xt, yt, d) {           //  create a loop function
+       setTimeout(function () {    //  call a 3s setTimeout when the loop is called
+           d.fx = x0 + i*(xt - x0)/step;
+           d.fy = y0 + i*(yt - y0)/step;         //  your code here
+          i++;                     //  increment the counter
+          if (i <= step) {            //  if the counter < 10, call the loop function
+             moveNode(i, step, x0, y0, xt, yt, d);             //  ..  again which will trigger another
+             simulation.alphaTarget(0.05);
+          }
+          else {
+            d.fx = null;
+            d.fy = null;
+          }            //  ..  setTimeout()
+       }, 1)
+    }
+
+    function dragged(d) {
+      //simulation.fix(d, d3.event.x, d3.event.y);
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    }
+
+    function dragended(d) {
+      if (!d3.event.active) simulation.alphaTarget(0);
+      simulation.restart();
+    }
+
+    </script>
+    <script>
+    // JavaScript
+    window.sr = ScrollReveal();
+    sr.reveal('.reveal_left', { origin: 'left', distance: '100px' });
+    sr.reveal('.reveal_right', { origin: 'right', distance: '100px' });
+    sr.reveal('.reveal_top', { origin: 'top', distance: '100px' });
+    //sr.reveal('.reveal_genres', {  });
+    //sr.reveal('.left', {container: '.intro', origin: 'left'})
+    //sr.reveal('.bar');
+    </script>
+</body>
+
+</html>
