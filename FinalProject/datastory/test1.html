@@ -263,7 +263,18 @@
         </div>
         <div class="container reveal_left col s6 genre_primary" id="genre_primary_container" style='overflow-y: scroll; height:80%;'>
             <h2 id = "genre_title"></h2>
-            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+            <div class="row">
+              <img class="left_graph col s6" width='100%' src="" id='genre_distri' style='border:1px solid black'/>
+              <p id='genre_distri_p' class="right_p col s6" >
+                blabl
+              </p>
+            </div>
+            <div class="row">
+              <img class="col s6" src="" width='100%' id='genre_hottness' style='border:1px solid black'/>
+              <p id="genre_hottness_p" class="col s6" >
+                blabl
+              </p>
+            </div>
             <p>
               Observation
             </p>
@@ -419,6 +430,13 @@
       var oldBGColor = $('#genre_primary_container').css('backgroundColor');
       var newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+.5+')');
       $('#genre_primary_container').css('backgroundColor', newBGColor);
+      $('#genre_distri').attr('src', 'data/genre_analysis/figures/' + d.genre + '_distri_year.png');
+      $('#genre_hottness').attr('src', 'data/genre_analysis/figures/' + d.genre + '_hottness.png');
+      d3.json("data/" + d.genre + "_analysis.json", function(error, genre_info) {
+        if (error) throw error;
+        document.getElementById('genre_distri_p').innerHTML = genre_info.distri;
+        document.getElementById('genre_hottness_p').innerHTML = genre_info.Hottness;
+      });
 
       step = 200;
       x_init = d.x;
