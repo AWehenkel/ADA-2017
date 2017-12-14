@@ -118,6 +118,8 @@ function clickOnGenreLink(d, a){
     var data = {};
     info_target = genre_info[a.target.genre];
     info_source = genre_info[a.source.genre];
+    data.xlabel = "Release Year";
+    data.ylabel = "Number of Songs";
     data.labels = info_target.years;
     data.series = [info_target.count, info_source.count];
     data.name = [a.target.genre, a.source.genre];
