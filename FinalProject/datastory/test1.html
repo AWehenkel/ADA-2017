@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon">
+    <link rel="stylesheet" href="chartist/dist/chartist.css">
+    <link rel="stylesheet" href="chartist/pluggin/chartist-plugin-tooltip.css">
+    <script src="chartist/dist/chartist.min.js"></script>
+    <script src="chartist/pluggin/chartist-plugin-tooltip.js"></script>
+    <script src="chartist/pluggin/chartist-plugin-legend.js"></script>
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <script type="text/javascript" src="js/d3.min.js"></script>
     <script>
@@ -261,12 +266,31 @@
         <div class="container reveal_top col s12">
             <h2> Genre Analysis </h2>
         </div>
-        <div class="container reveal_left col s6 genre_primary" id="genre_primary_container" style='overflow-y: scroll; height:80%;'>
-            <h2 id = "genre_title"></h2>
-            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+        <div class="container col s6 genre_primary"  style='overflow-y: scroll; height:80%;'>
+          <div id="genre_primary_all">
+            <h2>How Does It Work?</h2>
             <p>
-              Observation
+              Blablabla
             </p>
+          </div>
+          <div id="genre_primary_container" class="container col s12" style='display:none;'>
+            <h2 id = "genre_title"></h2>
+            <div class="row">
+              <div id="genre_distri" class="col s6 ct-chart" style='height:250px;'></div>
+              <p id='genre_distri_p' class="right_p col s6" ></p>
+              <div class="col s12" width='100%' src="" id='genre_distri_cmp' style='height:300px;'></div>
+            </div>
+            <div class="row">
+              <div class="col s6" src="" width='100%' id='genre_hottness' style='height:250px;'></div>
+              <p id="genre_hottness_p" class="col s6" ></p>
+              <div class="col s12" src="" width='100%' id='genre_hottness_cmp' style='height:300px;'></div>
+            </div>
+            <div class="row">
+              <div id='table_genre' class='col s6'></div>
+              <p id='table_genre_p'></p>
+            </div>
+          </div>
+
         </div>
         <div class="container reveal_right col s6">
             <svg class ='reveal_genres'width="960" height="640"></svg>
@@ -358,11 +382,14 @@
             .attr("y1", function(d) { return d.source.y; })
             .attr("x2", function(d) { return d.target.x; })
             .attr("y2", function(d) { return d.target.y; })
+            .attr("source", function(d) {return d.source; })
+            .attr("target", function(d) {return d.target; })
             .attr("stroke-width", function(d) { return d.stroke_width; })
             .style("opacity", .5)
             .attr("class", function(d) { return "genre"+d.source.id + " genre" + d.target.id; })
             .on("mouseover", function(){this.style.opacity=1;})
-            .on("mouseout", function(){this.style.opacity=.5;});
+            .on("mouseout", function(){this.style.opacity=.5;})
+            .on("click", function(d) { clickOnGenreLink(this, d); });
 
         node
              .attr("r", function(d) { return d.radius*2; })
@@ -396,19 +423,111 @@
         };
     })();
     prev_node = null;
-    function clickOnGenreNode(d){
+    prev_link = null;
+
+    function clickOnGenreLink(d, a){
+      resetNodeColour();
+      document.getElementById('genre_title').innerHTML = a.source.genre + " VS " + a.target.genre;
+      d.style.stroke = "black";
+      prev_link = d;
+
+      $('#genre_distri_p').hide();
+      $('#genre_hottness_p').hide();
+      $('#genre_distri').hide();
+      $('#genre_hottness').hide();
+      $('#genre_distri_cmp').show();
+      $('#genre_hottness_cmp').show();
+
+      d3.json("data/genre_analysis/counts.json", function(error, genre_info) {
+        if (error) throw error;
+        var data = {};
+        info_target = genre_info[a.target.genre];
+        info_source = genre_info[a.source.genre];
+        data.labels = info_target.years;
+        data.series = [info_target.count, info_source.count];
+        data.name = [a.target.genre, a.source.genre];
+        drawGraph(data, 'genre_distri_cmp');
+      });
+
+      d3.json("data/genre_analysis/hottness.json", function(error, genre_info) {
+        if (error) throw error;
+        var data = {};
+        info_target = genre_info[a.target.genre];
+        info_source = genre_info[a.source.genre];
+        data.labels = info_target.years;
+        data.series = [info_target.hottness, info_source.hottness, info_target.predict, info_source.predict];
+        data.name = [a.target.genre + " data ", a.source.genre + " data", a.target.genre + " prediction ", a.source.genre + " prediction"];
+        drawGraph(data, 'genre_hottness_cmp');
+      });
+
+
+    }
+    function drawGraph(data, div_id){
+      if (data.name != null){
+        plugins = [ Chartist.plugins.legend({ legendNames: data.name }) , Chartist.plugins.tooltip()];
+      }
+      else {
+        plugins = [Chartist.plugins.tooltip()];
+      }
+
+      // We are setting a few options for our chart and override the defaults
+      var options = {
+        // Don't draw the line chart points
+        //showPoint: true,
+        // Disable line smoothing
+        lineSmooth: false,
+        fullWidth: false,
+        // X-Axis specific configuration
+        axisX: {
+          // Lets offset the chart a bit from the labels
+          offset: 10,
+          // The label interpolation function enables you to modify the values
+          // used for the labels on each axis. Here we are converting the
+          // values into million pound.
+          labelInterpolationFnc: function(value) {
+            if ((value % 5) == 0)
+              return value;
+            return '';
+          }
+        },
+        // Y-Axis specific configuration
+        axisY: {
+          // Lets offset the chart a bit from the labels
+          offset: 30,
+          // The label interpolation function enables you to modify the values
+          // used for the labels on each axis. Here we are converting the
+          // values into million pound.
+          labelInterpolationFnc: function(value) {
+            return value;
+          }
+        },
+        plugins: plugins
+      };
+      new Chartist.Line('#'+div_id, data, options);
+    }
+
+    function resetNodeColour(d){
+      $("#genre_primary_all").hide();
+      $("#genre_primary_container").show();
       if(prev_node != null){
         var links = document.getElementsByClassName('genre' + prev_node.id);
         for(i=0; i < links.length; i++) {
           links[i].style.stroke = "#aaa";
         }
-        step = 200;
-        xt = d.x;
-        yt = d.y;
-        i = 0;
-        moveNode(i, step, prev_node.x, prev_node.y, d.x, d.y, prev_node);
+        if(d != null){
+          step = 200;
+          xt = d.x;
+          yt = d.y;
+          i = 0;
+          moveNode(i, step, prev_node.x, prev_node.y, d.x, d.y, prev_node);
+        }
       }
+      if(prev_link)
+        prev_link.style.stroke = "#aaa";
+    }
 
+    function clickOnGenreNode(d){
+      resetNodeColour(d);
       prev_node = d;
       var links = document.getElementsByClassName('genre' + d.id);
       for(i=0; i < links.length; i++) {
@@ -419,6 +538,44 @@
       var oldBGColor = $('#genre_primary_container').css('backgroundColor');
       var newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+.5+')');
       $('#genre_primary_container').css('backgroundColor', newBGColor);
+
+      $('#genre_distri_p').show();
+      $('#genre_hottness_p').show();
+      $('#genre_distri').show();
+      $('#genre_hottness').show();
+      $('#genre_distri_cmp').hide();
+      $('#genre_hottness_cmp').hide();
+
+      d3.json("data/genre_analysis/counts.json", function(error, genre_info) {
+        if (error) throw error;
+        var data = {};
+        info_target = genre_info[d.genre];
+        data.labels = info_target.years;
+        data.series = [info_target.count];
+        drawGraph(data, 'genre_distri');
+      });
+      d3.json("data/genre_analysis/hottness.json", function(error, genre_info) {
+        if (error) throw error;
+        var data = {};
+        info_target = genre_info[d.genre];
+        data.labels = info_target.years;
+        data.series = [info_target.hottness, info_target.predict];
+        data.name = ['Data', 'Prediction'];
+        drawGraph(data, 'genre_hottness');
+      });
+      d3.json("data/" + d.genre + "_analysis.json", function(error, genre_info) {
+        if (error) throw error;
+        document.getElementById('genre_distri_p').innerHTML = genre_info.distri;
+        document.getElementById('genre_hottness_p').innerHTML = genre_info.Hottness;
+      });
+
+
+      var client = new XMLHttpRequest();
+      client.open('GET', 'data/genre_analysis/figures/'+d.genre+'.tab');
+      client.onreadystatechange = function() {
+        document.getElementById("table_genre").innerHTML = client.responseText;
+      }
+      client.send();
 
       step = 200;
       x_init = d.x;
@@ -435,11 +592,12 @@
           i++;                     //  increment the counter
           if (i <= step) {            //  if the counter < 10, call the loop function
              moveNode(i, step, x0, y0, xt, yt, d);             //  ..  again which will trigger another
-             simulation.alphaTarget(0.05);
+             simulation.alphaTarget(0.1);
           }
           else {
             d.fx = null;
             d.fy = null;
+            simulation.alphaTarget(0);
           }            //  ..  setTimeout()
        }, 1)
     }
@@ -466,6 +624,7 @@
     //sr.reveal('.left', {container: '.intro', origin: 'left'})
     //sr.reveal('.bar');
     </script>
+
 </body>
 
 </html>
