@@ -17,13 +17,11 @@
     <script type="text/javascript" src="js/d3.min.js"></script>
     <script>
     (function() {
-
         var config = {
             viewFactor: 0.15,
             duration: 1000,
             reset: true,
         }
-
         window.sr = new ScrollReveal(config)
     })()
     </script>
@@ -71,10 +69,9 @@
                     <div class="collapsible-header">Feature Analysis</div>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="#feature1"> What we have </a></li>
-                            <li><a href="#feature2"> What we lack </a></li>
-                            <li><a href="#feature3"> Spotify to the rescue </a></li>
-                            <li><a href="#feature4"> What we'll definitely lack </a></li>
+                            <li><a href="#feature1"> Feature correlation </a></li>
+                            <li><a href="#feature2"> Genre correlation </a></li>
+                            <li><a href="#feature3"> Feature importance </a></li>
                         </ul>
                     </div>
                 </li>
@@ -147,9 +144,9 @@
                 First of all, we totally lack the genre of each song. This is a problem, because as one can think, this or that property could have a huge impact following the genre (the loudness for electronic music, the tempo in Blues or Latin music, ...).
             </p>
             <p>
-                Next, we lack data that are supposed to be here. As you can see in the table to the left, energy and danceability are always at 0.0, which following the <a href="https://labrosa.ee.columbia.edu/millionsong/pages/example-track-description">columns description</a> of MSD mean that the song isn't analyzed. However, it doesn't make sense to think that no song is analyzed (why add the column in this case). It specify that this attributs come from the Echo Nest API, but bad luck, this API is <a href="https://developer.spotify.com/spotify-echo-nest-api/">dead</a> since 2016. Even more worriyng, more than a third of the song doesn't have a year.
+                Next, we lack data that are supposed to be here. As you can see in the table to the left, energy and danceability are always at 0.0, which following the <a href="https://labrosa.ee.columbia.edu/millionsong/pages/example-track-description">columns description</a> of MSD mean that the song isn't analyzed. However, it doesn't make sense to think that no song is analyzed (why add the column in this case). It specify that this attributs come from the Echo Nest API, but bad luck, this API is <a href="https://developer.spotify.com/spotify-echo-nest-api/">dead</a> since 2016.
             </p>
-                   </div>
+        </div>
         <div class="col s1"></div>
         <div class="container reveal_right col s5">
             <table border="1" class="dataframe">
@@ -241,22 +238,56 @@
         </div>
         <div class="container reveal_right col s5">
             <p>
-                The original dataset comes from the <a href="https://labrosa.ee.columbia.edu/millionsong/">Million Song Dataset</a>. It contains the metadatas (like the artist, its hotttnesss, danceability, energy, year, duration , ...) and the analyze (fade out/in time, timbres, confidence, ... throughout a song) of a million songs.
+                In fact, the Echo Nest API is dead because it was bought by spotify years ago, thus the Spotify API is the one replacing it. We were able to gather the missing features of MSD, and even more. By using get_feature, we were able to retrieve plenty new ones: accousticness, instrumentalness, valence, speechiness, ... (complete list <a href="https://developer.spotify.com/web-api/get-audio-features/">here</a>).
+            </p>
+            <p>
+                As a desperate try to complete the missing values for the year and the song_hotttnesss, we requested this datas too. Unfortunately, they werent accurate or better than the one already present (and spotify doesn't give genre for a song, but for the artist, which isn't relevant most of the time).
             </p>
         </div>
     </div>
     <!-- DATA SECTION END -->
     <!-- FEATURE SECTION START -->
-    <div id="feature1" class="intro row">
+    <div id="feature0" class="intro_title row">
         <div class="container reveal_top col s12">
             <h2> Feature Analysis </h2>
         </div>
+    </div>
+    <div id="feature1" class="intro row">
+        <div class="container reveal_top col s12">
+            <h3>Feature correlation</h3>
+        </div>
         <div class="container reveal_left col s6">
-            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+            <img src="figures/correlationReduce.png">
         </div>
         <div class="container reveal_right col s6">
             <p>
-                "The Logical Song" was written primarily by Roger Hodgson, the lyric based on his experience of being sent away to boarding school for ten years.[4] It was a very personal song for Hodgson; he had worked on the song during soundchecks, and completed the lyrics and arrangement six months before proposing it to the band for the album.[5] In 1980, Hodgson was honored with the Ivor Novello Award from The British Academy of Composers and Songwriters for "The Logical Song" being named the best song both musically and lyrically. To this day, "The Logical Song" also has the distinction of being one of the most quoted lyrics in schools.[6][5] Hodgson has said of the song’s meaning: “The Logical Song” was born from my questions about what really matters in life. Throughout childhood we are taught all these ways to be and yet we are rarely told anything about our true self. We are taught how to function outwardly, but not guided to who we are inwardly. We go from the innocence and wonder of childhood to the confusion of adolescence that often ends in the cynicism and disillusionment of adulthood. In The Logical Song, the burning question that came down to its rawest place was 'please tell me who I am,' and that's basically what the song is about. I think this eternal question continues to hit such a deep chord in people around the world and why it stays so meaningful."[7][8][9]:3 The lyrics are a condemnation of an education system focused on categorical jargon as opposed to knowledge and sensitivity.[10] The lyrics are notable for their use of consonance, with a repetition of the '-ical/ -able' endings of multiple adjectives. Supertramp co-founder Rick Davies wrote the vocal harmony on the second chorus.[11] The song makes use of keyboards, castanets, and an instrumental section.[2] Among the contemporary sound effects in this song are the 'tackled' sound from a Mattel electronic football game[11] and the Trouble "Pop-o-matic" bubble – both popular at the time this song was released.
+                Let's start simple by going over a correlation between the feature. Obviously, we are interested in the first column, as its telling us if there are links between feature and the song_hotttnesss.
+            </p>
+        </div>
+    </div>
+    <div id="feature2" class="intro row">
+        <div class="container reveal_top col s12">
+            <h3>Genre correlation</h3>
+        </div>
+        <div class="container reveal_right col s6">
+            <p>
+                blablaba
+            </p>
+        </div>
+        <div class="container reveal_left col s6">
+            <img src="figures/correlationGenre.png">
+        </div>
+    </div>
+    <div id="feature3" class="intro row">
+        <div class="container reveal_top col s12">
+            <h3>Feature importance</h3>
+        </div>
+        <div class="container reveal_left col s6">
+            <img src="figures/RandomForest_feature_importance.png">
+        </div>
+        <div class="container reveal_right col s6">
+            <p>
+                blablaba
             </p>
         </div>
     </div>
@@ -266,34 +297,33 @@
         <div class="container reveal_top col s12">
             <h2> Genre Analysis </h2>
         </div>
-        <div class="container col s6 genre_primary"  style='overflow-y: scroll; height:80%;'>
-          <div id="genre_primary_all">
-            <h2>How Does It Work?</h2>
-            <p>
-              Blablabla
-            </p>
-          </div>
-          <div id="genre_primary_container" class="container col s12" style='display:none;'>
-            <h2 id = "genre_title"></h2>
-            <div class="row">
-              <div id="genre_distri" class="col s6 ct-chart" style='height:250px;'></div>
-              <p id='genre_distri_p' class="right_p col s6" ></p>
-              <div class="col s12" width='100%' src="" id='genre_distri_cmp' style='height:300px;'></div>
+        <div class="container col s6 genre_primary" style='overflow-y: scroll; height:80%;'>
+            <div id="genre_primary_all">
+                <h2>How Does It Work?</h2>
+                <p>
+                    Blablabla
+                </p>
             </div>
-            <div class="row">
-              <div class="col s6" src="" width='100%' id='genre_hottness' style='height:250px;'></div>
-              <p id="genre_hottness_p" class="col s6" ></p>
-              <div class="col s12" src="" width='100%' id='genre_hottness_cmp' style='height:300px;'></div>
+            <div id="genre_primary_container" class="container col s12" style='display:none;'>
+                <h2 id="genre_title"></h2>
+                <div class="row">
+                    <div id="genre_distri" class="col s6 ct-chart" style='height:250px;'></div>
+                    <p id='genre_distri_p' class="right_p col s6"></p>
+                    <div class="col s12" width='100%' src="" id='genre_distri_cmp' style='height:300px;'></div>
+                </div>
+                <div class="row">
+                    <div class="col s6" src="" width='100%' id='genre_hottness' style='height:250px;'></div>
+                    <p id="genre_hottness_p" class="col s6"></p>
+                    <div class="col s12" src="" width='100%' id='genre_hottness_cmp' style='height:300px;'></div>
+                </div>
+                <div class="row">
+                    <div id='table_genre' class='col s6'></div>
+                    <p id='table_genre_p'></p>
+                </div>
             </div>
-            <div class="row">
-              <div id='table_genre' class='col s6'></div>
-              <p id='table_genre_p'></p>
-            </div>
-          </div>
-
         </div>
         <div class="container reveal_right col s6">
-            <svg class ='reveal_genres'width="960" height="640"></svg>
+            <svg class='reveal_genres' width="960" height="640"></svg>
         </div>
     </div>
     <!-- GENRE SECTION END -->
@@ -325,6 +355,21 @@
 		</div>
 	</div>
     <!-- YEAR SECTION END -->
+    <!-- SMALL DATASET SECTION START -->
+    <div id="conclusion1" class="intro row">
+        <div class="container reveal_top col s12">
+            <h2> Conclusion </h2>
+        </div>
+        <div class="container reveal_left col s6">
+            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+        </div>
+        <div class="container reveal_right col s6">
+            <p>
+                "The Logical Song" was written primarily by Roger Hodgson, the lyric based on his experience of being sent away to boarding school for ten years.[4] It was a very personal song for Hodgson; he had worked on the song during soundchecks, and completed the lyrics and arrangement six months before proposing it to the band for the album.[5] In 1980, Hodgson was honored with the Ivor Novello Award from The British Academy of Composers and Songwriters for "The Logical Song" being named the best song both musically and lyrically. To this day, "The Logical Song" also has the distinction of being one of the most quoted lyrics in schools.[6][5] Hodgson has said of the song’s meaning: “The Logical Song” was born from my questions about what really matters in life. Throughout childhood we are taught all these ways to be and yet we are rarely told anything about our true self. We are taught how to function outwardly, but not guided to who we are inwardly. We go from the innocence and wonder of childhood to the confusion of adolescence that often ends in the cynicism and disillusionment of adulthood. In The Logical Song, the burning question that came down to its rawest place was 'please tell me who I am,' and that's basically what the song is about. I think this eternal question continues to hit such a deep chord in people around the world and why it stays so meaningful."[7][8][9]:3 The lyrics are a condemnation of an education system focused on categorical jargon as opposed to knowledge and sensitivity.[10] The lyrics are notable for their use of consonance, with a repetition of the '-ical/ -able' endings of multiple adjectives. Supertramp co-founder Rick Davies wrote the vocal harmony on the second chorus.[11] The song makes use of keyboards, castanets, and an instrumental section.[2] Among the contemporary sound effects in this song are the 'tackled' sound from a Mattel electronic football game[11] and the Trouble "Pop-o-matic" bubble – both popular at the time this song was released.
+            </p>
+        </div>
+    </div>
+    <!-- SMALL DATASET SECTION END -->
     <!-- CONCLUSION SECTION START -->
     <div id="conclusion1" class="intro row">
         <div class="container reveal_top col s12">
@@ -343,289 +388,279 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script>
-
     var svg = d3.select("svg"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
-
     var simulation = d3.forceSimulation()
         .force("link", d3.forceLink().id(function(d) { return d.id; }))
         .force("charge", d3.forceManyBody().strength(-2000))
         .force("center", d3.forceCenter(width / 2 - 120, height / 2 - 20));
-
-
     d3.json("data/genre_graph.json", function(error, graph) {
-      if (error) throw error;
-
-      graph.links.forEach(function(d){
-        d.source = d.source_id;
-        d.target = d.target_id;
-      });
-
-      var link = svg.append("g")
-                    .style("stroke", "#aaa")
-                    .selectAll("line")
-                    .data(graph.links)
-                    .enter().append("line");
-
-      var node = svg.append("g")
-                .attr("class", "nodes")
-      .selectAll("circle")
-                .data(graph.nodes)
-      .enter().append("circle")
-              .attr("r", 6)
-              .call(d3.drag()
-                  .on("start", dragstarted)
-                  .on("drag", dragged)
-                  .on("end", dragended));
-
-      var label = svg.append("g")
-          .attr("class", "labels")
-          .selectAll("text")
-          .data(graph.nodes)
-          .enter().append("text")
+        if (error) throw error;
+        graph.links.forEach(function(d) {
+            d.source = d.source_id;
+            d.target = d.target_id;
+        });
+        var link = svg.append("g")
+            .style("stroke", "#aaa")
+            .selectAll("line")
+            .data(graph.links)
+            .enter().append("line");
+        var node = svg.append("g")
+            .attr("class", "nodes")
+            .selectAll("circle")
+            .data(graph.nodes)
+            .enter().append("circle")
+            .attr("r", 6)
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+        var label = svg.append("g")
+            .attr("class", "labels")
+            .selectAll("text")
+            .data(graph.nodes)
+            .enter().append("text")
             .attr("class", "label")
             .text(function(d) { return d.genre; });
+        simulation.nodes(graph.nodes).on("tick", ticked);
 
-      simulation.nodes(graph.nodes).on("tick", ticked);
+        simulation.nodes(graph.nodes).on("tick", ticked);
 
-      function ticked() {
-        link
-            .attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; })
-            .attr("source", function(d) {return d.source; })
-            .attr("target", function(d) {return d.target; })
-            .attr("stroke-width", function(d) { return d.stroke_width; })
-            .style("opacity", .5)
-            .attr("class", function(d) { return "genre"+d.source.id + " genre" + d.target.id; })
-            .on("mouseover", function(){this.style.opacity=1;})
-            .on("mouseout", function(){this.style.opacity=.5;})
-            .on("click", function(d) { clickOnGenreLink(this, d); });
+        function ticked() {
+            link
+                .attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; })
+                .attr("source", function(d) { return d.source; })
+                .attr("target", function(d) { return d.target; })
+                .attr("stroke-width", function(d) { return d.stroke_width; })
+                .style("opacity", .5)
+                .attr("class", function(d) { return "genre" + d.source.id + " genre" + d.target.id; })
+                .on("mouseover", function() { this.style.opacity = 1; })
+                .on("mouseout", function() { this.style.opacity = .5; })
+                .on("click", function(d) { clickOnGenreLink(this, d); });
 
-        node
-             .attr("r", function(d) { return d.radius*2; })
-             .style("fill", function(d){return d.color;} )
-             .style("stroke", "#969696")
-             .style("stroke-width", "1px")
-             .on("mouseover", function(d) {this.style.cursor='pointer';})
-             .on("mouseout", function(d) {this.style.cursor='cursor';})
-             .on("click", function(d) { clickOnGenreNode(d); })
-             .attr("cx", function (d) { return d.x+6; })
-             .attr("cy", function(d) { return d.y-6; });
+            node
+                .attr("r", function(d) { return d.radius * 2; })
+                .style("fill", function(d) { return d.color; })
+                .style("stroke", "#969696")
+                .style("stroke-width", "1px")
+                .on("mouseover", function(d) { this.style.cursor = 'pointer'; })
+                .on("mouseout", function(d) { this.style.cursor = 'cursor'; })
+                .on("click", function(d) { clickOnGenreNode(d); })
+                .attr("cx", function(d) { return d.x + 6; })
+                .attr("cy", function(d) { return d.y - 6; });
 
-        label
-            .attr("x", function(d) { return d.x - d.genre.length*1.5; })
-                .attr("y", function (d) { return d.y; })
+            label
+                .attr("x", function(d) { return d.x - d.genre.length * 1.5; })
+                .attr("y", function(d) { return d.y; })
                 .style("font-size", "10px").style("fill", "black");
-      }
-      simulation.force("link").links(graph.links);
+        }
+        simulation.force("link").links(graph.links);
     });
 
     function dragstarted(d) {
-      if (!d3.event.active) simulation.alphaTarget(0.3).restart()
-      //simulation.fix(d);
+        if (!d3.event.active) simulation.alphaTarget(0.3).restart()
+        //simulation.fix(d);
     }
-
-    var delay = ( function() {
+    var delay = (function() {
         var timer = 0;
         return function(callback, ms) {
-            clearTimeout (timer);
+            clearTimeout(timer);
             timer = setTimeout(callback, ms);
         };
     })();
     prev_node = null;
     prev_link = null;
 
-    function clickOnGenreLink(d, a){
-      resetNodeColour();
-      document.getElementById('genre_title').innerHTML = a.source.genre + " VS " + a.target.genre;
-      d.style.stroke = "black";
-      prev_link = d;
+    function clickOnGenreLink(d, a) {
+        resetNodeColour();
+        document.getElementById('genre_title').innerHTML = a.source.genre + " VS " + a.target.genre;
+        d.style.stroke = "black";
+        prev_link = d;
 
-      $('#genre_distri_p').hide();
-      $('#genre_hottness_p').hide();
-      $('#genre_distri').hide();
-      $('#genre_hottness').hide();
-      $('#genre_distri_cmp').show();
-      $('#genre_hottness_cmp').show();
+        $('#genre_distri_p').hide();
+        $('#genre_hottness_p').hide();
+        $('#genre_distri').hide();
+        $('#genre_hottness').hide();
+        $('#genre_distri_cmp').show();
+        $('#genre_hottness_cmp').show();
 
-      d3.json("data/genre_analysis/counts.json", function(error, genre_info) {
-        if (error) throw error;
-        var data = {};
-        info_target = genre_info[a.target.genre];
-        info_source = genre_info[a.source.genre];
-        data.labels = info_target.years;
-        data.series = [info_target.count, info_source.count];
-        data.name = [a.target.genre, a.source.genre];
-        drawGraph(data, 'genre_distri_cmp');
-      });
+        d3.json("data/genre_analysis/counts.json", function(error, genre_info) {
+            if (error) throw error;
+            var data = {};
+            info_target = genre_info[a.target.genre];
+            info_source = genre_info[a.source.genre];
+            data.labels = info_target.years;
+            data.series = [info_target.count, info_source.count];
+            data.name = [a.target.genre, a.source.genre];
+            drawGraph(data, 'genre_distri_cmp');
+        });
 
-      d3.json("data/genre_analysis/hottness.json", function(error, genre_info) {
-        if (error) throw error;
-        var data = {};
-        info_target = genre_info[a.target.genre];
-        info_source = genre_info[a.source.genre];
-        data.labels = info_target.years;
-        data.series = [info_target.hottness, info_source.hottness, info_target.predict, info_source.predict];
-        data.name = [a.target.genre + " data ", a.source.genre + " data", a.target.genre + " prediction ", a.source.genre + " prediction"];
-        drawGraph(data, 'genre_hottness_cmp');
-      });
+        d3.json("data/genre_analysis/hottness.json", function(error, genre_info) {
+            if (error) throw error;
+            var data = {};
+            info_target = genre_info[a.target.genre];
+            info_source = genre_info[a.source.genre];
+            data.labels = info_target.years;
+            data.series = [info_target.hottness, info_source.hottness, info_target.predict, info_source.predict];
+            data.name = [a.target.genre + " data ", a.source.genre + " data", a.target.genre + " prediction ", a.source.genre + " prediction"];
+            drawGraph(data, 'genre_hottness_cmp');
+        });
 
 
     }
-    function drawGraph(data, div_id){
-      if (data.name != null){
-        plugins = [ Chartist.plugins.legend({ legendNames: data.name }) , Chartist.plugins.tooltip()];
-      }
-      else {
-        plugins = [Chartist.plugins.tooltip()];
-      }
 
-      // We are setting a few options for our chart and override the defaults
-      var options = {
-        // Don't draw the line chart points
-        //showPoint: true,
-        // Disable line smoothing
-        lineSmooth: false,
-        fullWidth: false,
-        // X-Axis specific configuration
-        axisX: {
-          // Lets offset the chart a bit from the labels
-          offset: 10,
-          // The label interpolation function enables you to modify the values
-          // used for the labels on each axis. Here we are converting the
-          // values into million pound.
-          labelInterpolationFnc: function(value) {
-            if ((value % 5) == 0)
-              return value;
-            return '';
-          }
-        },
-        // Y-Axis specific configuration
-        axisY: {
-          // Lets offset the chart a bit from the labels
-          offset: 30,
-          // The label interpolation function enables you to modify the values
-          // used for the labels on each axis. Here we are converting the
-          // values into million pound.
-          labelInterpolationFnc: function(value) {
-            return value;
-          }
-        },
-        plugins: plugins
-      };
-      new Chartist.Line('#'+div_id, data, options);
-    }
-
-    function resetNodeColour(d){
-      $("#genre_primary_all").hide();
-      $("#genre_primary_container").show();
-      if(prev_node != null){
-        var links = document.getElementsByClassName('genre' + prev_node.id);
-        for(i=0; i < links.length; i++) {
-          links[i].style.stroke = "#aaa";
+    function drawGraph(data, div_id) {
+        if (data.name != null) {
+            plugins = [Chartist.plugins.legend({ legendNames: data.name }), Chartist.plugins.tooltip()];
+        } else {
+            plugins = [Chartist.plugins.tooltip()];
         }
-        if(d != null){
-          step = 200;
-          xt = d.x;
-          yt = d.y;
-          i = 0;
-          moveNode(i, step, prev_node.x, prev_node.y, d.x, d.y, prev_node);
+
+        // We are setting a few options for our chart and override the defaults
+        var options = {
+            // Don't draw the line chart points
+            //showPoint: true,
+            // Disable line smoothing
+            lineSmooth: false,
+            fullWidth: false,
+            // X-Axis specific configuration
+            axisX: {
+                // Lets offset the chart a bit from the labels
+                offset: 10,
+                // The label interpolation function enables you to modify the values
+                // used for the labels on each axis. Here we are converting the
+                // values into million pound.
+                labelInterpolationFnc: function(value) {
+                    if ((value % 5) == 0)
+                        return value;
+                    return '';
+                }
+            },
+            // Y-Axis specific configuration
+            axisY: {
+                // Lets offset the chart a bit from the labels
+                offset: 30,
+                // The label interpolation function enables you to modify the values
+                // used for the labels on each axis. Here we are converting the
+                // values into million pound.
+                labelInterpolationFnc: function(value) {
+                    return value;
+                }
+            },
+            plugins: plugins
+        };
+        new Chartist.Line('#' + div_id, data, options);
+    }
+
+    function resetNodeColour(d) {
+        $("#genre_primary_all").hide();
+        $("#genre_primary_container").show();
+        if (prev_node != null) {
+            var links = document.getElementsByClassName('genre' + prev_node.id);
+            for (i = 0; i < links.length; i++) {
+                links[i].style.stroke = "#aaa";
+            }
+            if (d != null) {
+                step = 200;
+                xt = d.x;
+                yt = d.y;
+                i = 0;
+                moveNode(i, step, prev_node.x, prev_node.y, d.x, d.y, prev_node);
+            }
         }
-      }
-      if(prev_link)
-        prev_link.style.stroke = "#aaa";
+        if (prev_link)
+            prev_link.style.stroke = "#aaa";
     }
 
-    function clickOnGenreNode(d){
-      resetNodeColour(d);
-      prev_node = d;
-      var links = document.getElementsByClassName('genre' + d.id);
-      for(i=0; i < links.length; i++) {
-        links[i].style.stroke = d.color;
-      }
-      document.getElementById('genre_title').innerHTML = d.genre;
-      document.getElementById('genre_primary_container').style.backgroundColor = d.color;
-      var oldBGColor = $('#genre_primary_container').css('backgroundColor');
-      var newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+.5+')');
-      $('#genre_primary_container').css('backgroundColor', newBGColor);
+    function clickOnGenreNode(d) {
+        resetNodeColour(d);
+        prev_node = d;
+        var links = document.getElementsByClassName('genre' + d.id);
+        for (i = 0; i < links.length; i++) {
+            links[i].style.stroke = d.color;
+        }
+        document.getElementById('genre_title').innerHTML = d.genre;
+        document.getElementById('genre_primary_container').style.backgroundColor = d.color;
+        var oldBGColor = $('#genre_primary_container').css('backgroundColor');
+        var newBGColor = oldBGColor.replace('rgb', 'rgba').replace(')', ',' + .5 + ')');
+        $('#genre_primary_container').css('backgroundColor', newBGColor);
 
-      $('#genre_distri_p').show();
-      $('#genre_hottness_p').show();
-      $('#genre_distri').show();
-      $('#genre_hottness').show();
-      $('#genre_distri_cmp').hide();
-      $('#genre_hottness_cmp').hide();
+        $('#genre_distri_p').show();
+        $('#genre_hottness_p').show();
+        $('#genre_distri').show();
+        $('#genre_hottness').show();
+        $('#genre_distri_cmp').hide();
+        $('#genre_hottness_cmp').hide();
 
-      d3.json("data/genre_analysis/counts.json", function(error, genre_info) {
-        if (error) throw error;
-        var data = {};
-        info_target = genre_info[d.genre];
-        data.labels = info_target.years;
-        data.series = [info_target.count];
-        drawGraph(data, 'genre_distri');
-      });
-      d3.json("data/genre_analysis/hottness.json", function(error, genre_info) {
-        if (error) throw error;
-        var data = {};
-        info_target = genre_info[d.genre];
-        data.labels = info_target.years;
-        data.series = [info_target.hottness, info_target.predict];
-        data.name = ['Data', 'Prediction'];
-        drawGraph(data, 'genre_hottness');
-      });
-      d3.json("data/" + d.genre + "_analysis.json", function(error, genre_info) {
-        if (error) throw error;
-        document.getElementById('genre_distri_p').innerHTML = genre_info.distri;
-        document.getElementById('genre_hottness_p').innerHTML = genre_info.Hottness;
-      });
+        d3.json("data/genre_analysis/counts.json", function(error, genre_info) {
+            if (error) throw error;
+            var data = {};
+            info_target = genre_info[d.genre];
+            data.labels = info_target.years;
+            data.series = [info_target.count];
+            drawGraph(data, 'genre_distri');
+        });
+        d3.json("data/genre_analysis/hottness.json", function(error, genre_info) {
+            if (error) throw error;
+            var data = {};
+            info_target = genre_info[d.genre];
+            data.labels = info_target.years;
+            data.series = [info_target.hottness, info_target.predict];
+            data.name = ['Data', 'Prediction'];
+            drawGraph(data, 'genre_hottness');
+        });
+        d3.json("data/" + d.genre + "_analysis.json", function(error, genre_info) {
+            if (error) throw error;
+            document.getElementById('genre_distri_p').innerHTML = genre_info.distri;
+            document.getElementById('genre_hottness_p').innerHTML = genre_info.Hottness;
+        });
 
 
-      var client = new XMLHttpRequest();
-      client.open('GET', 'data/genre_analysis/figures/'+d.genre+'.tab');
-      client.onreadystatechange = function() {
-        document.getElementById("table_genre").innerHTML = client.responseText;
-      }
-      client.send();
+        var client = new XMLHttpRequest();
+        client.open('GET', 'data/genre_analysis/figures/' + d.genre + '.tab');
+        client.onreadystatechange = function() {
+            document.getElementById("table_genre").innerHTML = client.responseText;
+        }
+        client.send();
 
-      step = 200;
-      x_init = d.x;
-      y_init = d.y;
-      i = 0;
-      simulation.force("center", null);
-      moveNode(i, step, x_init, y_init, width/2 - 120, height / 2 - 20, d);
+        step = 200;
+        x_init = d.x;
+        y_init = d.y;
+        i = 0;
+        simulation.force("center", null);
+        moveNode(i, step, x_init, y_init, width / 2 - 120, height / 2 - 20, d);
     }
 
-    function moveNode (i, step, x0, y0, xt, yt, d) {           //  create a loop function
-       setTimeout(function () {    //  call a 3s setTimeout when the loop is called
-           d.fx = x0 + i*(xt - x0)/step;
-           d.fy = y0 + i*(yt - y0)/step;         //  your code here
-          i++;                     //  increment the counter
-          if (i <= step) {            //  if the counter < 10, call the loop function
-             moveNode(i, step, x0, y0, xt, yt, d);             //  ..  again which will trigger another
-             simulation.alphaTarget(0.1);
-          }
-          else {
-            d.fx = null;
-            d.fy = null;
-            simulation.alphaTarget(0);
-          }            //  ..  setTimeout()
-       }, 1)
+    function moveNode(i, step, x0, y0, xt, yt, d) { //  create a loop function
+        setTimeout(function() { //  call a 3s setTimeout when the loop is called
+            d.fx = x0 + i * (xt - x0) / step;
+            d.fy = y0 + i * (yt - y0) / step; //  your code here
+            i++; //  increment the counter
+            if (i <= step) { //  if the counter < 10, call the loop function
+                moveNode(i, step, x0, y0, xt, yt, d); //  ..  again which will trigger another
+                simulation.alphaTarget(0.1);
+            } else {
+                d.fx = null;
+                d.fy = null;
+                simulation.alphaTarget(0);
+            } //  ..  setTimeout()
+        }, 1)
     }
 
     function dragged(d) {
-      //simulation.fix(d, d3.event.x, d3.event.y);
-      d.fx = d3.event.x;
-      d.fy = d3.event.y;
+        //simulation.fix(d, d3.event.x, d3.event.y);
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
     }
 
     function dragended(d) {
-      if (!d3.event.active) simulation.alphaTarget(0);
-      simulation.restart();
+        if (!d3.event.active) simulation.alphaTarget(0);
+        simulation.restart();
     }
-
     </script>
     <script>
     // JavaScript
@@ -637,7 +672,6 @@
     //sr.reveal('.left', {container: '.intro', origin: 'left'})
     //sr.reveal('.bar');
     </script>
-
 </body>
 
 </html>
