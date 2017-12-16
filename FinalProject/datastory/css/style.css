@@ -115,6 +115,12 @@ img {
            width: 1.5em;
            height: 1.5em;
        }
+       .ct-legend .ct-series-5:before {
+           background-color: #59922b;
+           border-color: #59922b;
+           width: 1.5em;
+           height: 1.5em;
+       }
 
        .crazyPink li.ct-series-0:before {
           background-color: #C2185B;

@@ -1,5 +1,4 @@
 (function (root, factory) {
-  alert("ic");
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(["chartist"], function (Chartist) {
@@ -52,7 +51,6 @@
             tooltipSelector = 'ct-slice-pie';
           }
         }
-        alert("ic");
         var $chart = chart.container;
         var $toolTip = $chart.querySelector('.chartist-tooltip');
         if (!$toolTip) {
@@ -201,7 +199,6 @@
     }
 
   } (window, document, Chartist));
-alert("ic");
   return Chartist.plugins.tooltip;
 
 }));
