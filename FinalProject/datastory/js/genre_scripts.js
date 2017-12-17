@@ -251,9 +251,13 @@ function clickOnGenreNode(d){
     links[i].style.stroke = d.color;
   }
   document.getElementById('genre_title').innerHTML = d.genre;
+  document.getElementById('genre_title').style.backgroundColor = d.color;
+  var oldBGColor = $('#genre_title').css('backgroundColor');
+  var newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+.5+')');
+  $('#genre_title').css('backgroundColor', newBGColor);
   document.getElementById('genre_primary_container').style.backgroundColor = d.color;
   var oldBGColor = $('#genre_primary_container').css('backgroundColor');
-  var newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+.5+')');
+  var newBGColor = oldBGColor.replace('rgb','rgba').replace(')', ','+.2+')');
   $('#genre_primary_container').css('backgroundColor', newBGColor);
 
   $('#genre_distri_p').show();
@@ -277,9 +281,14 @@ function clickOnGenreNode(d){
   });
 
   d3.json("data/" + d.genre + "_analysis.json", function(error, genre_info) {
-    if (error) throw error;
-    document.getElementById('genre_distri_p').innerHTML = genre_info.distri;
-    document.getElementById('genre_hottness_p').innerHTML = genre_info.Hottness;
+    if (error) {
+      document.getElementById('genre_distri_p').innerHTML = "There is not sufficient amount of data to make any very interesting observation.";
+      document.getElementById('genre_hottness_p').innerHTML = "";
+    }
+    else{
+      document.getElementById('genre_distri_p').innerHTML = genre_info.distri;
+      document.getElementById('genre_hottness_p').innerHTML = genre_info.Hottness;
+    }
   });
 
   drawGraphNodes("hottness", "genre_hottness", d);
