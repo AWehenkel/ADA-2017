@@ -297,54 +297,46 @@
         <div class="container reveal_top col s12">
             <h2> Genre Analysis </h2>
         </div>
-        <div class="container col s6 genre_primary"  style='overflow-y: scroll; height:80%;'>
-          <div id="genre_primary_all">
-            <h2>How Does It Work?</h2>
-            <p>
-              The graph at the left represents the connection between the different genre of music. Each node represents a genre and its size represents
-               the number of songs of this genre in the dataset. The link between nodes represents the songs which are considered to belong to both type of music.
-               The thickness of the link represents the number of songs belonging to both type.</br>
-
-               This graph has been built to ease the vizualisation of the general overview of the genre distribution in the dataset. However on that we have also wanted to
-               add something to allow the visitor to vizualize the different distribution of features conditionnaly to the genre.
-               </br>Indeed by <strong>Clicking</strong>  on a node you can
-               vizualize the distribution of some feature conditionnaly to this genre and some comment are made about noticeable facts.
-             </br><strong>Clicking</strong> on a link between 2 nodes
-               allows you to compare the distributions of the features conditionnaly to each node genre.
-            </p>
-          </div>
-          <div id="genre_primary_container" class="container col s12" style='display:none;'>
-            <h2 id = "genre_title"></h2>
-            <div class="row">
-              <div id="genre_distri" class="col s6 ct-chart" style='height:250px;'></div>
-              <p id='genre_distri_p' class="right_p col s6" ></p>
-              <div class="col s12" width='100%' src="" id='genre_distri_cmp' style='height:300px;'></div>
+        <div class="container col s6 genre_primary" style='overflow-y: scroll; height:80%;'>
+            <div id="genre_primary_all">
+                <h2>How Does It Work?</h2>
+                <p>
+                    The graph at the left represents the connection between the different genre of music. Each node represents a genre and its size represents the number of songs of this genre in the dataset. The link between nodes represents the songs which are considered to belong to both type of music. The thickness of the link represents the number of songs belonging to both type.</br>
+                    This graph has been built to ease the vizualisation of the general overview of the genre distribution in the dataset. However on that we have also wanted to add something to allow the visitor to vizualize the different distribution of features conditionnaly to the genre.
+                    </br>Indeed by <strong>Clicking</strong> on a node you can vizualize the distribution of some feature conditionnaly to this genre and some comment are made about noticeable facts.
+                    </br><strong>Clicking</strong> on a link between 2 nodes allows you to compare the distributions of the features conditionnaly to each node genre.
+                </p>
             </div>
-            <div class="row">
-              <div class="col s6" src="" width='100%' id='genre_hottness' style='height:250px;'></div>
-              <p id="genre_hottness_p" class="col s6" ></p>
-              <div class="col s12" src="" width='100%' id='genre_hottness_cmp' style='height:300px;'></div>
+            <div id="genre_primary_container" class="container col s12" style='display:none;'>
+                <h2 id="genre_title"></h2>
+                <div class="row">
+                    <div id="genre_distri" class="col s6 ct-chart" style='height:250px;'></div>
+                    <p id='genre_distri_p' class="right_p col s6"></p>
+                    <div class="col s12" width='100%' src="" id='genre_distri_cmp' style='height:300px;'></div>
+                </div>
+                <div class="row">
+                    <div class="col s6" src="" width='100%' id='genre_hottness' style='height:250px;'></div>
+                    <p id="genre_hottness_p" class="col s6"></p>
+                    <div class="col s12" src="" width='100%' id='genre_hottness_cmp' style='height:300px;'></div>
+                </div>
+                <div class="row">
+                    <form>
+                        <select id="genre_other_opt" class="col s12" onchange="drawGenreOtherGraph(this.value);" style="  display: block;margin-top: 60px;">
+                            <option value="acousticness">Acousticness</option>
+                            <option value="duration">Duration</option>
+                            <option value="hottness">Hottness</option>
+                            <option value="instrumentalness">Instrumentalness</option>
+                            <option value="speechiness">Speechiness</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col s12" src="" width='100%' id='genre_other' style='height:300px;'></div>
+                </div>
             </div>
-            <div class="row">
-              <form>
-                <select id = "genre_other_opt" class="col s12" onchange="drawGenreOtherGraph(this.value);" style="  display: block;margin-top: 60px;">
-                  <option value="acousticness">Acousticness</option>
-                  <option value="duration">Duration</option>
-                  <option value="hottness">Hottness</option>
-                  <option value="instrumentalness">Instrumentalness</option>
-                  <option value="speechiness">Speechiness</option>
-                </select>
-              </form>
-
-            </div>
-            <div class="row">
-              <div class="col s12" src="" width='100%' id='genre_other' style='height:300px;'></div>
-            </div>
-          </div>
-
         </div>
         <div class="container reveal_right col s6">
-            <svg class ='reveal_genres'width="960" height="640"></svg>
+            <svg class='reveal_genres' width="960" height="640"></svg>
         </div>
     </div>
     <!-- GENRE SECTION END -->
@@ -362,49 +354,81 @@
             </p>
         </div>
     </div>
-	<div id="year2" class="intro row">
-		<div class="container reveal_top col s12">
-			<h2> Per feature analysis </h2>
-		</div>
-		<div class="container reveal_left col s6">
-			<!--Image here -->
-		</div>
-		<div class="container reveal_right col s6">
-			<p id="acousticness" style="display:hidden;">
-			 Most of the songs are not very acoustic today. The median acousticness seems to decrease with the years, especially after the 70s.
-			</p>
-			<p id="artist" style="display:hidden;">
-			 Thankfully, we can see a correlation between the artist hotness and the song hotness. The distribution also seems to less centered around 0.5 in the recent years.
-			</p>
-			<p id="danceability" style="display:hidden;">
-			 We can't say much, except that it seems centered around 0.5.
-			</p>
-			<p id="duration" style="display:hidden;">
-			 The median is around 250s. The best (and worst) songs are really close to this value, but their distribution is probably the same as with the other hotness values, it's just that there are fewer samples. We can see a jump from a ~200s center to the ~250s center after the 60s.
-			</p>
-			<p id="energy" style="display:hidden;">
-			 Same as with duration, we see a shift decade by decade, where the songs become more energetic.
-			</p>
-			<p id="instrumentalness" style="display:hidden;">
-			 Nothing much to say, except that the songs (at least the ones chosen by the MSD) were never instrumental.
-			</p>
-			<p id="liveness" style="display:hidden;">
-			 The distribution stays the same through the decades.
-			</p>
-			<p id="loudness" style="display:hidden;">
-			 The songs get louder during the 90s and 00s. The top songs seem to be the the louder.
-			</p>
-			<p id="speechiness" style="display:hidden;">
-			 Same as instrumentalness, we can't say much.
-			</p>
-			<p id="tempo" style="display:hidden;">
-			 The tempo distribution stays the same throughout the years.
-			</p>
-			<p id="valence" style="display:hidden;">
-			 The valence gets "worse" through the decades and the best songs stay around the 0.5 value.
-			 </p>
-		</div>
-	</div>
+    <div id="year2" class="intro row">
+        <div class="container reveal_top col s12">
+            <h2> Per feature analysis </h2>
+        </div>
+        <div class="container reveal_left col s6">
+            <img id="per_feature_img" src="../year_analysis_plots/single_year/acousticness_1960.png">
+            <div class="row">
+                <div class="input-field col s4">
+                    <select id="select_feature">
+                        <option value="acousticness">acousticness</option>
+                        <option value="artist_hotttnesss">artist hotttnesss</option>
+                        <option value="danceability">danceability</option>
+                        <option value="duration">duration</option>
+                        <option value="energy">energy</option>
+                        <option value="instrumentalness">instrumentalness</option>
+                        <option value="liveness">liveness</option>
+                        <option value="loudness">loudness</option>
+                        <option value="speechiness">speechiness</option>
+                        <option value="tempo">tempo</option>
+                        <option value="valence">valence</option>
+                    </select>
+                    <label>Select feature</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="year_to_display" type="number" value="1960" min="1960" max="2010" step="1">
+                    <label for="year_to_display">Year/Decade to display</label>
+                </div>
+                <div class="col s4">
+                    <p>
+                        <input name="group1" type="radio" id="year_step" checked />
+                        <label for="year_step">Year</label>
+                    </p>
+                    <p>
+                        <input name="group1" type="radio" id="decade_step" />
+                        <label for="decade_step">Decade</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="container reveal_right col s6">
+            <p id="acousticness_text" style="display:block;">
+                Most of the songs are not very acoustic today. The median acousticness seems to decrease with the years, especially after the 70s.
+            </p>
+            <p id="artist_hotttnesss_text" style="display:none;">
+                Thankfully, we can see a correlation between the artist hotness and the song hotness. The distribution also seems to less centered around 0.5 in the recent years.
+            </p>
+            <p id="danceability_text" style="display:none;">
+                We can't say much, except that it seems centered around 0.5.
+            </p>
+            <p id="duration_text" style="display:none;">
+                The median is around 250s. The best (and worst) songs are really close to this value, but their distribution is probably the same as with the other hotness values, it's just that there are fewer samples. We can see a jump from a ~200s center to the ~250s center after the 60s.
+            </p>
+            <p id="energy_text" style="display:none;">
+                Same as with duration, we see a shift decade by decade, where the songs become more energetic.
+            </p>
+            <p id="instrumentalness_text" style="display:none;">
+                Nothing much to say, except that the songs (at least the ones chosen by the MSD) were never instrumental.
+            </p>
+            <p id="liveness_text" style="display:none;">
+                The distribution stays the same through the decades.
+            </p>
+            <p id="loudness_text" style="display:none;">
+                The songs get louder during the 90s and 00s. The top songs seem to be the the louder.
+            </p>
+            <p id="speechiness_text" style="display:none;">
+                Same as instrumentalness, we can't say much.
+            </p>
+            <p id="tempo_text" style="display:none;">
+                The tempo distribution stays the same throughout the years.
+            </p>
+            <p id="valence_text" style="display:none;">
+                The valence gets "worse" through the decades and the best songs stay around the 0.5 value.
+            </p>
+        </div>
+    </div>
     <!-- YEAR SECTION END -->
     <!-- SMALL DATASET SECTION START -->
     <div id="conclusion1" class="intro row">
@@ -448,6 +472,91 @@
     //sr.reveal('.reveal_genres', {  });
     //sr.reveal('.left', {container: '.intro', origin: 'left'})
     //sr.reveal('.bar');
+    </script>
+    <script type="text/javascript">
+    function displayImg(feature, year, step) {
+
+        var folder = '';
+        if (step === "1") {
+            folder = 'single_year/' + feature + "_" + (year);
+        } else {
+            folder = 'decade/' + feature + "_" + (year) + "-" + (year + 10);
+        }
+
+        $('#per_feature_img').attr('src', '../year_analysis_plots/' + folder + ".png")
+    }
+
+    $(document).ready(function() {
+        $('select').material_select();
+
+        var currentFeat = "acousticness"
+        var currentStep = "1"
+        var currentYear = 1960
+
+
+        $("select")
+            .change(() => {
+                var str = "";
+                $("#select_feature option:selected").each(function() {
+                    str += $(this).text() + " ";
+                });
+
+                $('#' + currentFeat + "_text").attr("style", "display:none;");
+                currentFeat = str.replace(" ", "_").trim();
+                $('#' + currentFeat + "_text").attr("style", "display:block;");
+
+                displayImg(currentFeat, currentYear, currentStep);
+            })
+
+        $('#year_step').click(function() {
+            if ($(this).is(':checked') && currentStep == "10") {
+                currentStep = "1";
+                $('#year_to_display').attr("step", "1");
+                $('#year_to_display').attr("max", "2010");
+
+                currentYear = 1960;
+                $('#year_to_display').val(currentYear);
+
+                displayImg(currentFeat, currentYear, currentStep);
+
+            }
+        });
+
+        $('#decade_step').click(function() {
+            if ($(this).is(':checked') && currentStep == "1") {
+                currentStep = "10";
+                $('#year_to_display').attr("step", "10");
+                $('#year_to_display').attr("max", "2009");
+
+                currentYear = 1960;
+                $('#year_to_display').val(currentYear);
+
+                displayImg(currentFeat, currentYear, currentStep);
+
+            }
+        });
+
+        $('#year_to_display').change(function() {
+
+            var elem = $(this);
+            currentYear = parseInt(elem.val());
+
+            if (currentYear < 1960) {
+                currentYear = 1960;
+            } else if (currentYear > 2010 && currentStep == "1") {
+                currentYear = 2010;
+            } else if (currentYear > 2009 && currentStep == "10") {
+                currentYear = 2000;
+            } else if (currentYear % 10 != 0 && currentStep == "10") {
+                currentYear = currentYear - (currentYear % 10);
+            }
+
+            elem.val(currentYear);
+
+            displayImg(currentFeat, currentYear, currentStep);
+
+        });
+    });
     </script>
 </body>
 
