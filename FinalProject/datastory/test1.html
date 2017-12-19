@@ -82,7 +82,7 @@
                     <div class="collapsible-header">Year Analysis</div>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="#year1"> Year biais </a></li>
+                            <li><a href="#year1"> Year bias </a></li>
                             <li><a href="#year2"> Per feature analysis </a></li>
                         </ul>
                     </div>
@@ -117,7 +117,7 @@
         </div>
         <div class="container reveal_right col s4">
             <p>
-                The original dataset comes from the <a href="https://labrosa.ee.columbia.edu/millionsong/">Million Song Dataset</a> (aka MSD). It contains the metadatas (like the artist, its hotttnesss, danceability, energy, year, duration , ...) and the analyze (fade out/in time, timbres, confidence, ... throughout a song) of a million songs.
+                The original dataset comes from the <a href="https://labrosa.ee.columbia.edu/millionsong/">Million Song Dataset</a> (aka MSD). It contains the metadatas (like the artist, its hotness, danceability, energy, year, duration , ...) and the analysis (fade out/in time, timbres, confidence, ... throughout a song) of a million songs.
             </p>
         </div>
     </div>
@@ -128,13 +128,13 @@
         <div class="col s1"></div>
         <div class="container reveal_left col s4">
             <p>
-                Unfortunately, MSD lacks plenty of data.
+                Unfortunately, the MSD lacks plenty of data.
             </p>
             <p>
-                First of all, we totally lack the genre of each song. This is a problem, because as one can think, this or that property could have a huge impact following the genre (the loudness for electronic music, the tempo in Blues or Latin music, ...).
+                First of all, we totally lack the genre of each song. This is a problem, because as one can think, an other property could heavily depend on the genre (the loudness for electronic music, the tempo in Blues or Latin music, ...). The genre could also be a decisive component of the hotness of a song (rock is probably more appreciated than classical, in average).
             </p>
             <p>
-                Next, we lack data that are supposed to be here. As you can see in the table to the left, energy and danceability are always at 0.0, which following the <a href="https://labrosa.ee.columbia.edu/millionsong/pages/example-track-description">columns description</a> of MSD mean that the song isn't analyzed. However, it doesn't make sense to think that no song is analyzed (why add the column in this case). It specify that this attributs come from the Echo Nest API, but bad luck, this API is <a href="https://developer.spotify.com/spotify-echo-nest-api/">dead</a> since 2016.
+                Next, we lack data that is supposed to be there. As you can see in the table to the left, energy and danceability are always at 0.0, which following the <a href="https://labrosa.ee.columbia.edu/millionsong/pages/example-track-description">columns description</a> of MSD means that the song isn't analyzed. However, it doesn't make sense to think that no song is analyzed (why add the column in this case). It specifies that these attributes come from the Echo Nest API, but bad luck, this API is <a href="https://developer.spotify.com/spotify-echo-nest-api/">dead</a> since 2016.
             </p>
         </div>
         <div class="col s1"></div>
@@ -228,10 +228,10 @@
         </div>
         <div class="container reveal_right col s5">
             <p>
-                In fact, the Echo Nest API is dead because it was bought by spotify years ago, thus the Spotify API is the one replacing it. We were able to gather the missing features of MSD, and even more. By using get_feature, we were able to retrieve plenty new ones: accousticness, instrumentalness, valence, speechiness, ... (complete list <a href="https://developer.spotify.com/web-api/get-audio-features/">here</a>).
+                In fact, the Echo Nest API is dead because it was bought by Spotify years ago, thus the Spotify API is the one replacing it. We were able to gather the missing features of MSD, and even more. By making some api calls, we were able to retrieve plenty of new ones: acousticness, instrumentalness, valence, speechiness, ... (complete list <a href="https://developer.spotify.com/web-api/get-audio-features/">here</a>).
             </p>
             <p>
-                As a desperate attempt to complete the missing values for the year and the song_hotttnesss, we requested this datas too. Unfortunately, they werent accurate or better than the one already present, as they are linked to an album, usually not the first one to use this song. As for the genre, Spotify doesn't give genre for a song, but for the artist, which isn't relevant most of the time.
+                In a desperate attempt to complete the missing values for the year and the song hotness, we requested these too. Unfortunately, they weren't accurate or better than the ones already present, as they are linked to an album, usually not the first one to contain this song. As for the genre, Spotify doesn't give a genre to the songs, but to the artists, which isn't relevant most of the time.
             </p>
         </div>
     </div>
@@ -251,13 +251,13 @@
         </div>
         <div class="container reveal_right col s6">
             <p>
-                Let's start simple by going over a correlation between the feature. Obviously, we are interested in the first column, as its telling us if there are links between feature and the song_hotttnesss.
+                Let's start simple by going over a correlation between the feature. Obviously, we are interested in the first column, as its telling us if there are links between feature and the song hotness.
             </p>
             <p>
-                We don't learn much from this graph at the first glance. We see a weak positive correlation with year, energy, loudness and a weak negative one with accousticness, valence. For the positive one, the loudness and energy correlations could be interpreted as people aren't fond of quiet song. The year correlation is related as how the song-hotttnesss is computed, as it decayed with time. The negative ones are linked to the comment about loudness/energy.
+                We don't learn much from this graph at first glance. We see a weak positive correlation with year, energy, loudness and a weak negative one with accousticness, valence. For the positive one, the loudness and energy correlations could be interpreted as people aren't fond of quiet songs. The year correlation is related as how the song hotness is computed, as it decays with time. The negative ones are linked to the comment about loudness/energy.
             </p>
             <p>
-                Let's note something about the definition of song_hotttnesss: it's a value that evolve with how popular is a song. Thus if we are in 2010, a song of 2010 has higher chance to have a higher song_hotttnesss than a song from 1970. This means that our work on the song_hotttnesss, if we achieve to show anything, will explain how to make a <b>popular</b> song, but not always a <b>good</b> one.
+                Let's note something about the definition of song hotness: it's a value that evolves with how popular a song is. Thus, if we are in 2010, a song of 2010 has a higher chance to have a higher song hotness than a song from 1970. This means that our work on the song hotness, if we achieve to show anything, will explain how to make a <b>popular</b> song, but not always a <b>good</b> one.
             </p>
         </div>
     </div>
@@ -267,10 +267,10 @@
         </div>
         <div class="container reveal_left col s6">
             <p>
-                Again, mostly weak correlation here. Maybe we can say that it's better to be a Pop-Rock song to have a higher song_hotttnesss. However, as explained in a next section (<a href="#genre1">Genre Analysis</a>), the genre aren't uniformly distributed on the dataset and we lack plenty of them anyway (coverage of around a fourth of the dataset).
+                Again, mostly weak correlations here. Maybe we can say that a Pop-Rock song has a higher chance to have a high song hotness. However, as explained in a further section (<a href="#genre1">Genre Analysis</a>), the genres aren't uniformly distributed on the dataset and we lack plenty of them anyway (coverage of around a fourth of the dataset).
             </p>
             <p>
-                Conclusion at this point, correlation only aren't enough to give any insight of how to make a popular song.
+                Conclusion at this point, looking at only the correlation isn't enough to give any insight on how to make a popular song.
             </p>
         </div>
         <div class="container reveal_right col s6">
@@ -286,10 +286,10 @@
         </div>
         <div class="container reveal_right col s6">
             <p>
-                To move further in the analyze, we decided to apply a bagging regression to our dataset: a random forest regressor. This kind of regression allow us to get a feature importance on how to predict the song_hotttnesss of a song following every other feature we gathered.
+                To move further in the analysis, we decided to apply a bagging regression to our dataset: a random forest regressor. This kind of regression allow us to get a feature importance on how to predict the song hotness of a song depending on every other feature we gathered.
             </p>
             <p>
-                Unfortunately, we can't extract any useful insight again. Every feature (except maybe key), is equally important to predict the song_hotttnesss. Note however that it's a slightly different result from the previous correlation we made. This means we may have missed something, thus we will plot the distribution for every feature.
+                Unfortunately, we can't extract any useful insight again. Every feature (except maybe key), is equally important to predict the song hotness. Note however that it's a slightly different result from the previous correlation we made. This means that we may have missed something, thus we will plot the distribution for every feature.
             </p>
         </div>
     </div>
@@ -324,7 +324,7 @@
                 Here you can select a feature to show the distribution (the <b>blue</b> markers) and the linear regression computed by seaborn (the <b>red</b> line).
             </p>
             <p>
-                First of all, it looks like the song_hotttnesss in general has a problem. We can see that song_hotttnesss never takes value in (0, 0.2). Either the dataset is highly biaised, or the way to compute the song_hotttnesss doesn't allow values in this range.
+                First of all, it looks like the song hotness in general has a problem. It never takes value between 0 and 0.2. Either the dataset is highly biased, or the way to compute the song hotness doesn't allow values in this range.
             </p>
             <p>
                 Next, the distributions aren't random,
@@ -343,10 +343,10 @@
             <div id="genre_primary_all">
                 <h3>How Does It Work?</h3>
                 <p>
-                    The graph at the left represents the connection between the different genre of music. Each node represents a genre and its size represents the number of songs of this genre in the dataset. The link between nodes represents the songs which are considered to belong to both type of music. The thickness of the link represents the number of songs belonging to both type.</br>
-                    This graph has been built to ease the vizualisation of the general overview of the genre distribution in the dataset. However on that we have also wanted to add something to allow the visitor to vizualize the different distribution of features conditionnaly to the genre.
-                    </br>Indeed by <strong>Clicking</strong> on a node you can vizualize the distribution of some feature conditionnaly to this genre and some comment are made about noticeable facts.
-                    </br><strong>Clicking</strong> on a link between 2 nodes allows you to compare the distributions of the features conditionnaly to each node genre.
+                    The graph at the left represents the connection between the different genres of music. Each node represents a genre and its size represents the number of songs of this genre in the dataset. The link between nodes represents the songs which are considered to belong to both types of music. The thickness of the link represents the number of songs belonging to both types.</br>
+                    This graph has been built to ease the visualisation of the general overview of the genre distribution in the dataset. However, we have also wanted to add something to allow the visitor to visualize the different distributions of features depending on the genre.
+                    </br>By <strong>Clicking</strong> on a node you can visualize the distribution of some feature depending on this genre and some comments are made about noticeable facts.
+                    </br><strong>Clicking</strong> on a link between two nodes allows you to compare the distributions of the features depending on each genre node.
                 </p>
             </div>
             <div id="genre_primary_container" class="container col s12" style='display:none;'>
@@ -390,7 +390,7 @@
     </div>
     <div id="year1" class="intro row">
         <div class="container reveal_top col s12">
-            <h3> Year biais </h3>
+            <h3> Year bias </h3>
         </div>
         <div class="container reveal_left col s6">
             <img class="picture" src="figures/year_analysis_plots/samples_per_year.png">
@@ -445,7 +445,7 @@
                 Most of the songs are not very acoustic today. The median acousticness seems to decrease with the years, especially after the 70s.
             </p>
             <p id="artist_hotttnesss_text" style="display:none;">
-                Thankfully, we can see a correlation between the artist hotness and the song hotness. The distribution also seems to less centered around 0.5 in the recent years.
+                Thankfully, we can see a correlation between the artist hotness and the song hotness. The distribution also seems less centered around 0.5 in the recent years (meaning there are more "extremely" bad or "extremely" good artists).
             </p>
             <p id="danceability_text" style="display:none;">
                 We can't say much, except that it seems centered around 0.5.
