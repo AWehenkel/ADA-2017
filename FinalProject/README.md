@@ -19,7 +19,7 @@ How genres have evolved over time?
 What is the evolution of hotness depending on different features?
 
 # Dataset
-We'll use the Million Song dataset. We'll simply download it, remove the Data folder (as we don't need the audio), therefore keeping only the Additional Files, and use Pandas to import the h5 and db files as DataFrames. We'll then filter out the columns we don't need (artist longitude latitude for example) and join the DataFrames to begin working on them. The size of the data will therefore be very manageable, as most of the 280GB is useless for us (we'll only need the additional files of the MSD).
+We'll use the Million Song dataset. We'll simply download it, remove the Data folder (as we don't need the precise analysis per track), therefore keeping only the Additional Files, and use Pandas to import the h5 and db files as DataFrames. We'll then filter out the columns we don't need (artist longitude latitude for example) and join the DataFrames to begin working on them. The size of the data will therefore be very manageable, as most of the 280GB is useless for us (we'll only need the additional files of the MSD).
 
 # A list of internal milestones up until project milestone 2
 | Week | To do |
@@ -29,7 +29,7 @@ We'll use the Million Song dataset. We'll simply download it, remove the Data fo
 | Week 3 | Find correlations for countries |
 | Week 4 | Complete Milestone 2 |
 | Week 5 | Begin the datastory structure |
-| Week 6 | Work on the datastory and chose of important things to show |
+| Week 6 | Work on the datastory and choose important things to show |
 | Week 7 | Write the comments of the data story |
 
 # Data analysis
@@ -41,7 +41,7 @@ We extracted, enriched using Spotify and merged the data (see the readme in the 
 - Continue working on year / genre analysis
 
 # Members contributions
-We all worked in paralell and cross checked our work. However each member of the group focused his work on one specific sub-analysis.
+We all worked in parallel and cross checked our work. However each member of the group focused his work on one specific sub-analysis.
 - Quentin
   - Dataset Cleaning
   - Feature analysis section
@@ -51,7 +51,7 @@ We all worked in paralell and cross checked our work. However each member of the
   - Dataset Cleaning
   - Genre analysis section
   - Datasets merging
-  - Genre analysis part in datastory(comments and coding)
+  - Genre analysis part in datastory (comments and coding)
 - Guillaume
   - Initial dataset exploration
   - Help for spotify
@@ -59,4 +59,4 @@ We all worked in paralell and cross checked our work. However each member of the
   - README
   - Proofreading
 # Poster presentation
-We will work together during one morning the week before the presentation to chose which figures and which results to present onto the poster.
+We will work together to chose which figures and which results to present onto the poster. Quentin will do the presentation.
