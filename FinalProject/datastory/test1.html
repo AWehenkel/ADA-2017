@@ -88,12 +88,10 @@
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Conclusion</div>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="#conclusion1"> Conclusion </a></li>
-                        </ul>
-                    </div>
+                    <div class="collapsible-header"><a href="#small1">Subset (2004-2009)</a></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><a href="#conclusion1">Conclusion</a></div>
                 </li>
             </ul>
             <div class="col s3"></div>
@@ -321,10 +319,10 @@
                 Here you can select a feature to show the distribution (the <b>blue</b> markers) and the linear regression computed by seaborn (the <b>red</b> line).
             </p>
             <p>
-                First of all, it looks like the song hotness in general has a problem. It never takes value between 0 and 0.2. Either the dataset is highly biased, or the way to compute the song hotness doesn't allow values in this range.
+                First of all, it looks like the song hotness in general has a problem. It never takes value between 0 and 0.2. Either the dataset is highly biased, or the way to compute the song hotness doesn't allow values in this range. Both are a problem if you want to do a serious analysis anyway.
             </p>
             <p>
-                Next, the distributions aren't random,
+                If you go through the plots, you will see that most of the regression slopes are quite similar to the correlation (the negative slope are related to the negative correlation seen before). It was kind of expected, but what we can cleary state is that the data aren't uniformly distributed. The loudness for example has more than half of its samples between <b>[-10, 0]</b> for a domain <b>[-50, 10]</b>. 
             </p>
         </div>
     </div>
@@ -475,33 +473,33 @@
     </div>
     <!-- YEAR SECTION END -->
     <!-- SMALL DATASET SECTION START -->
-    <div id="conclusion1" class="intro row">
-        <div class="container reveal_top col s12">
-            <h2> Small dataset (2004-2009) </h2>
-        </div>
+    <div id="small0" class="container reveal_top">
+        <h2> Subset (2004-2009) </h2>
+    </div>
+    <div id="small1" class="intro row">
         <div class="container reveal_left col s6">
             <img class="picture" src="figures/feature_2004-2009/RandomForest_feature_importance.png" / />
         </div>
         <div class="container reveal_right col s6">
             <p>
-				We filtered the dataset, keeping only the years with the most samples and redoing the feature analysis.<br>
-				Now year has dropped quite some ranks, and is really not important. This seems to indicate that the year has little to no importance for the songs in the last five years.<br>
-				Otherwise, the distribution stays roughly the same. Some features switches places, and genre is now top 3, but given that the values are very close, we can't reach any conclusion.            </p>
+                We filtered the dataset, keeping only the years with the most samples and redoing the feature analysis.
+                <br> Now year has dropped quite some ranks, and is really not important. This seems to indicate that the year has little to no importance for the songs in the last five years.
+                <br> Otherwise, the distribution stays roughly the same. Some features switches places, and genre is now top 3, but given that the values are very close, we can't reach any conclusion. </p>
         </div>
     </div>
     <!-- SMALL DATASET SECTION END -->
     <!-- CONCLUSION SECTION START -->
+    <div id="conclusion0" class="container reveal_top">
+        <h2> Conclusion </h2>
+    </div>
     <div id="conclusion1" class="intro row">
-        <div class="container reveal_top col s12">
-            <h2> Conclusion </h2>
-        </div>
         <div class="container reveal_left col s6">
-            <img src="figures/dontknow.jpg" / />
+            <img class="picture" src="figures/dontknow.jpg" / />
         </div>
         <div class="container reveal_right col s6">
             <p>
-				We can't reach any great conclusion, as explained during this whole data story.<br>
-				This may be due to the bias of the MSD, or simply due to the fact that there isn't any meaningful correlation between a feature (except year and the artist hotness) and the song rating.
+                We can't reach any great conclusion, as explained during this whole data story.
+                <br> This may be due to the bias of the MSD, or simply due to the fact that there isn't any meaningful correlation between a feature (except year and the artist hotness) and the song rating.
             </p>
         </div>
     </div>
