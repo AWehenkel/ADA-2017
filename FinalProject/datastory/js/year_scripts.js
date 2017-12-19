@@ -26,7 +26,7 @@
                 });
 
                 $('#' + currentFeat + "_text").attr("style", "display:none;");
-                currentFeat = str.replace(" ", "_").trim();
+                currentFeat = str.trim().replace(" ", "_");
                 $('#' + currentFeat + "_text").attr("style", "display:block;");
 
                 displayImg(currentFeat, currentYear, currentStep);
