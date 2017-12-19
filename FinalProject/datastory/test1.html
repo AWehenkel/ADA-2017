@@ -480,15 +480,16 @@
     <!-- SMALL DATASET SECTION START -->
     <div id="conclusion1" class="intro row">
         <div class="container reveal_top col s12">
-            <h2> small dataset </h2>
+            <h2> Small dataset (2004-2009) </h2>
         </div>
         <div class="container reveal_left col s6">
-            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+            <img class="picture" src="figures/feature_2004-2009/RandomForest_feature_importance.png" / />
         </div>
         <div class="container reveal_right col s6">
             <p>
-                "The Logical Song" was written primarily by Roger Hodgson, the lyric based on his experience of being sent away to boarding school for ten years.[4] It was a very personal song for Hodgson; he had worked on the song during soundchecks, and completed the lyrics and arrangement six months before proposing it to the band for the album.[5] In 1980, Hodgson was honored with the Ivor Novello Award from The British Academy of Composers and Songwriters for "The Logical Song" being named the best song both musically and lyrically. To this day, "The Logical Song" also has the distinction of being one of the most quoted lyrics in schools.[6][5] Hodgson has said of the song’s meaning: “The Logical Song” was born from my questions about what really matters in life. Throughout childhood we are taught all these ways to be and yet we are rarely told anything about our true self. We are taught how to function outwardly, but not guided to who we are inwardly. We go from the innocence and wonder of childhood to the confusion of adolescence that often ends in the cynicism and disillusionment of adulthood. In The Logical Song, the burning question that came down to its rawest place was 'please tell me who I am,' and that's basically what the song is about. I think this eternal question continues to hit such a deep chord in people around the world and why it stays so meaningful."[7][8][9]:3 The lyrics are a condemnation of an education system focused on categorical jargon as opposed to knowledge and sensitivity.[10] The lyrics are notable for their use of consonance, with a repetition of the '-ical/ -able' endings of multiple adjectives. Supertramp co-founder Rick Davies wrote the vocal harmony on the second chorus.[11] The song makes use of keyboards, castanets, and an instrumental section.[2] Among the contemporary sound effects in this song are the 'tackled' sound from a Mattel electronic football game[11] and the Trouble "Pop-o-matic" bubble – both popular at the time this song was released.
-            </p>
+				We filtered the dataset, keeping only the years with the most samples and redoing the feature analysis.<br>
+				Now year has dropped quite some ranks, and is really not important. This seems to indicate that the year has little to no importance for the songs in the last five years.<br>
+				Otherwise, the distribution stays roughly the same. Some features switches places, and genre is now top 3, but given that the values are very close, we can't reach any conclusion.            </p>
         </div>
     </div>
     <!-- SMALL DATASET SECTION END -->
@@ -498,11 +499,12 @@
             <h2> Conclusion </h2>
         </div>
         <div class="container reveal_left col s6">
-            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+            <img src="figures/dontknow.jpg" / />
         </div>
         <div class="container reveal_right col s6">
             <p>
-                "The Logical Song" was written primarily by Roger Hodgson, the lyric based on his experience of being sent away to boarding school for ten years.[4] It was a very personal song for Hodgson; he had worked on the song during soundchecks, and completed the lyrics and arrangement six months before proposing it to the band for the album.[5] In 1980, Hodgson was honored with the Ivor Novello Award from The British Academy of Composers and Songwriters for "The Logical Song" being named the best song both musically and lyrically. To this day, "The Logical Song" also has the distinction of being one of the most quoted lyrics in schools.[6][5] Hodgson has said of the song’s meaning: “The Logical Song” was born from my questions about what really matters in life. Throughout childhood we are taught all these ways to be and yet we are rarely told anything about our true self. We are taught how to function outwardly, but not guided to who we are inwardly. We go from the innocence and wonder of childhood to the confusion of adolescence that often ends in the cynicism and disillusionment of adulthood. In The Logical Song, the burning question that came down to its rawest place was 'please tell me who I am,' and that's basically what the song is about. I think this eternal question continues to hit such a deep chord in people around the world and why it stays so meaningful."[7][8][9]:3 The lyrics are a condemnation of an education system focused on categorical jargon as opposed to knowledge and sensitivity.[10] The lyrics are notable for their use of consonance, with a repetition of the '-ical/ -able' endings of multiple adjectives. Supertramp co-founder Rick Davies wrote the vocal harmony on the second chorus.[11] The song makes use of keyboards, castanets, and an instrumental section.[2] Among the contemporary sound effects in this song are the 'tackled' sound from a Mattel electronic football game[11] and the Trouble "Pop-o-matic" bubble – both popular at the time this song was released.
+				We can't reach any great conclusion, as explained during this whole data story.<br>
+				This may be due to the bias of the MSD, or simply due to the fact that there isn't any meaningful correlation between a feature (except year and the artist hotness) and the song rating.
             </p>
         </div>
     </div>
