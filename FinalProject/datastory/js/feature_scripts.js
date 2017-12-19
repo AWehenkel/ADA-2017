@@ -1,5 +1,5 @@
 function displayImgDistribution(feature) {
-    $('#per_feature_img_distribution').attr('src', '../split notebooks/figures/scatter_feature/scatter_' + feature + ".png")
+    $('#per_feature_img_distribution').attr('src', 'figures/scatter_feature/scatter_' + feature + ".png")
 }
 
 $(document).ready(function() {

@@ -7,7 +7,7 @@
             folder = 'decade/' + feature + "_" + (year) + "-" + (year + 10);
         }
 
-        $('#per_feature_img').attr('src', '../year_analysis_plots/' + folder + ".png")
+        $('#per_feature_img').attr('src', 'figures/year_analysis_plots/' + folder + ".png")
     }
 
     $(document).ready(function() {

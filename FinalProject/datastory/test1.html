@@ -248,7 +248,7 @@
             <h3>Feature correlation</h3>
         </div>
         <div class="container reveal_left col s6">
-            <img src="figures/correlationReduce.png">
+            <img src="figures/feature/correlationReduce.png">
         </div>
         <div class="container reveal_right col s6">
             <p>
@@ -275,7 +275,7 @@
             </p>
         </div>
         <div class="container reveal_left col s6">
-            <img src="figures/correlationGenre.png">
+            <img src="figures/feature/correlationGenre.png">
         </div>
     </div>
     <div id="feature3" class="intro row">
@@ -283,7 +283,7 @@
             <h3>Feature importance</h3>
         </div>
         <div class="container reveal_left col s6">
-            <img src="figures/RandomForest_feature_importance.png">
+            <img src="figures/feature/RandomForest_feature_importance.png">
         </div>
         <div class="container reveal_right col s6">
             <p>
@@ -299,8 +299,10 @@
             <h3>Feature distribution</h3>
         </div>
         <div class="container reveal_left col s6">
-            <img id="per_feature_img_distribution" src="../split notebooks/figures/scatter_feature/scatter_acousticness.png">
-            <div class="input-field col s4">
+            <img id="per_feature_img_distribution" src="figures/scatter_feature/scatter_acousticness.png">
+        </div>
+        <div class="container reveal_right col s6">
+            <div class="input-field">
                 <select id="select_feature_distribution">
                     <option value="acousticness">acousticness</option>
                     <option value="danceability">danceability</option>
@@ -317,8 +319,8 @@
                 </select>
                 <label>Select feature</label>
             </div>
-        </div>
-        <div class="container reveal_right col s6">
+            <br>
+            <br>
             <p>
                 Here you can select a feature to show the distribution (the <b>blue</b> markers) and the linear regression computed by seaborn (the <b>red</b> line).
             </p>
@@ -338,7 +340,7 @@
         </div>
     </div>
     <div id="genre1" class="intro row">
-        <div class="container col s6 genre_primary" style='overflow-y: scroll; height:80%;'>
+        <div class="container col s6 genre_primary reveal_left" style='overflow-y: scroll; height:80%;'>
             <div id="genre_primary_all">
                 <h2>How Does It Work?</h2>
                 <p>
@@ -361,7 +363,7 @@
                     <div class="col s12" src="" width='100%' id='genre_hottness_cmp' style='height:300px;'></div>
                 </div>
                 <div class="row">
-                    <form>
+                    <div class="input-field">
                         <select id="genre_other_opt" class="col s12" onchange="drawGenreOtherGraph(this.value);" style="  display: block;margin-top: 60px;">
                             <option value="acousticness">Acousticness</option>
                             <option value="duration">Duration</option>
@@ -369,7 +371,7 @@
                             <option value="instrumentalness">Instrumentalness</option>
                             <option value="speechiness">Speechiness</option>
                         </select>
-                    </form>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col s12" src="" width='100%' id='genre_other' style='height:300px;'></div>
@@ -392,7 +394,7 @@
             <h3> Year biais </h3>
         </div>
         <div class="container reveal_left col s6">
-            <img src="../year_analysis_plots/samples_per_year.png">
+            <img src="figures/year_analysis_plots/samples_per_year.png">
         </div>
         <div class="container reveal_right col s6">
             <p>
@@ -405,7 +407,7 @@
             <h3> Per feature analysis </h3>
         </div>
         <div class="container reveal_left col s6">
-            <img id="per_feature_img" src="../year_analysis_plots/single_year/acousticness_1960.png">
+            <img id="per_feature_img" src="figures/year_analysis_plots/single_year/acousticness_1960.png">
             <div class="row">
                 <div class="input-field col s4">
                     <select id="select_feature">
