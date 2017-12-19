@@ -72,6 +72,7 @@
                             <li><a href="#feature1"> Feature correlation </a></li>
                             <li><a href="#feature2"> Genre correlation </a></li>
                             <li><a href="#feature3"> Feature importance </a></li>
+                            <li><a href="#feature4"> Feature distribution </a></li>
                         </ul>
                     </div>
                 </li>
@@ -286,7 +287,46 @@
         </div>
         <div class="container reveal_right col s6">
             <p>
-                blablaba
+                To move further in the analyze, we decided to apply a bagging regression to our dataset: a random forest regressor. This kind of regression allow us to get a feature importance on how to predict the song_hotttnesss of a song following every other feature we gathered.
+            </p>
+            <p>
+                Unfortunately, we can't extract any useful insight again. Every feature (except maybe key), is equally important to predict the song_hotttnesss. Note however that it's a slightly different result from the previous correlation we made. This means we may have missed something, thus we will plot the distribution for every feature.
+            </p>
+        </div>
+    </div>
+    <div id="feature4" class="intro row">
+        <div class="container reveal_top col s12">
+            <h3>Feature distribution</h3>
+        </div>
+        <div class="container reveal_left col s6">
+            <img id="per_feature_img_distribution" src="../split notebooks/figures/scatter_feature/scatter_acousticness.png">
+            <div class="input-field col s4">
+                <select id="select_feature_distribution">
+                    <option value="acousticness">acousticness</option>
+                    <option value="danceability">danceability</option>
+                    <option value="duration">duration</option>
+                    <option value="energy">energy</option>
+                    <option value="instrumentalness">instrumentalness</option>
+                    <option value="key">key</option>
+                    <option value="liveness">liveness</option>
+                    <option value="loudness">loudness</option>
+                    <option value="speechiness">speechiness</option>
+                    <option value="tempo">tempo</option>
+                    <option value="valence">valence</option>
+                    <option value="year">year</option>
+                </select>
+                <label>Select feature</label>
+            </div>
+        </div>
+        <div class="container reveal_right col s6">
+            <p>
+                Here you can select a feature to show the distribution (the <b>blue</b> markers) and the linear regression computed by seaborn (the <b>red</b> line).
+            </p>
+            <p>
+                First of all, it looks like the song_hotttnesss in general has a problem. We can see that song_hotttnesss never takes value in (0, 0.2). Either the dataset is highly biaised, or the way to compute the song_hotttnesss doesn't allow values in this range.
+            </p>
+            <p>
+                Next, the distributions aren't random,
             </p>
         </div>
     </div>
@@ -470,6 +510,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="js/genre_scripts.js"></script>
     <script src="js/year_scripts.js"></script>
+    <script src="js/feature_scripts.js"></script>
     <script>
     // JavaScript
     window.sr = ScrollReveal();
@@ -479,6 +520,8 @@
     //sr.reveal('.reveal_genres', {  });
     //sr.reveal('.left', {container: '.intro', origin: 'left'})
     //sr.reveal('.bar');
+    </script>
+    <script type="text/javascript">
     </script>
 </body>
 
