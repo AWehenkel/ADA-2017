@@ -49,7 +49,7 @@
             <h2> Plan </h2>
         </div>
         <div class="container reveal_left left col s4">
-            <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
+            <img class="picture" src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
         </div>
         <div class="container reveal_right right col s7">
             <div class="col s1"></div>
@@ -61,7 +61,6 @@
                             <li><a href="#data1"> What we have </a></li>
                             <li><a href="#data2"> What we lack </a></li>
                             <li><a href="#data3"> Spotify to the rescue </a></li>
-                            <li><a href="#data4"> What we'll definitely lack </a></li>
                         </ul>
                     </div>
                 </li>
@@ -114,7 +113,7 @@
             <h3>What we have</h3>
         </div>
         <div class="container reveal_left col s6">
-            <img src="figures/millionsong2.jpg" / />
+            <img class="picture" src="figures/millionsong2.jpg" / />
         </div>
         <div class="container reveal_right col s4">
             <p>
@@ -225,7 +224,7 @@
             <h3>Spotify to the rescue</h3>
         </div>
         <div class="container reveal_left col s6">
-            <img src="figures/spotifyAPI.jpg">
+            <img class="picture" src="figures/spotifyAPI.jpg">
         </div>
         <div class="container reveal_right col s5">
             <p>
@@ -248,7 +247,7 @@
             <h3>Feature correlation</h3>
         </div>
         <div class="container reveal_left col s6">
-            <img src="figures/feature/correlationReduce.png">
+            <img class="correlation" src="figures/feature/correlationReduce.png">
         </div>
         <div class="container reveal_right col s6">
             <p>
@@ -266,7 +265,7 @@
         <div class="container reveal_top col s12">
             <h3>Genre correlation</h3>
         </div>
-        <div class="container reveal_right col s6">
+        <div class="container reveal_left col s6">
             <p>
                 Again, mostly weak correlation here. Maybe we can say that it's better to be a Pop-Rock song to have a higher song_hotttnesss. However, as explained in a next section (<a href="#genre1">Genre Analysis</a>), the genre aren't uniformly distributed on the dataset and we lack plenty of them anyway (coverage of around a fourth of the dataset).
             </p>
@@ -274,16 +273,16 @@
                 Conclusion at this point, correlation only aren't enough to give any insight of how to make a popular song.
             </p>
         </div>
-        <div class="container reveal_left col s6">
-            <img src="figures/feature/correlationGenre.png">
+        <div class="container reveal_right col s6">
+            <img class="correlation" src="figures/feature/correlationGenre.png">
         </div>
     </div>
     <div id="feature3" class="intro row">
-        <div class="container reveal_top col s12">
+        <div class="container reveal_top">
             <h3>Feature importance</h3>
         </div>
         <div class="container reveal_left col s6">
-            <img src="figures/feature/RandomForest_feature_importance.png">
+            <img class="picture" src="figures/feature/RandomForest_feature_importance.png">
         </div>
         <div class="container reveal_right col s6">
             <p>
@@ -295,11 +294,11 @@
         </div>
     </div>
     <div id="feature4" class="intro row">
-        <div class="container reveal_top col s12">
+        <div class="container reveal_top">
             <h3>Feature distribution</h3>
         </div>
         <div class="container reveal_left col s6">
-            <img id="per_feature_img_distribution" src="figures/scatter_feature/scatter_acousticness.png">
+            <img class="picture" id="per_feature_img_distribution" src="figures/scatter_feature/scatter_acousticness.png">
         </div>
         <div class="container reveal_right col s6">
             <div class="input-field">
@@ -335,14 +334,14 @@
     <!-- FEATURE SECTION END -->
     <!-- GENRE SECTION START -->
     <div id="genre0" class="intro_title row">
-        <div class="container reveal_top col s12">
+        <div class="container reveal_top">
             <h2> Genre Analysis </h2>
         </div>
     </div>
     <div id="genre1" class="intro row">
-        <div class="container col s6 genre_primary reveal_left" style='overflow-y: scroll; height:80%;'>
+        <div class="container col s6 genre_primary reveal_left" style='overflow-y: scroll; height:80%;padding-left: 5%;'>
             <div id="genre_primary_all">
-                <h2>How Does It Work?</h2>
+                <h3>How Does It Work?</h3>
                 <p>
                     The graph at the left represents the connection between the different genre of music. Each node represents a genre and its size represents the number of songs of this genre in the dataset. The link between nodes represents the songs which are considered to belong to both type of music. The thickness of the link represents the number of songs belonging to both type.</br>
                     This graph has been built to ease the vizualisation of the general overview of the genre distribution in the dataset. However on that we have also wanted to add something to allow the visitor to vizualize the different distribution of features conditionnaly to the genre.
@@ -385,7 +384,7 @@
     <!-- GENRE SECTION END -->
     <!-- YEAR SECTION START -->
     <div id="year0" class="intro_title row">
-        <div class="container reveal_top col s12">
+        <div class="container reveal_top">
             <h2> Year Analysis </h2>
         </div>
     </div>
@@ -394,7 +393,7 @@
             <h3> Year biais </h3>
         </div>
         <div class="container reveal_left col s6">
-            <img src="figures/year_analysis_plots/samples_per_year.png">
+            <img class="picture" src="figures/year_analysis_plots/samples_per_year.png">
         </div>
         <div class="container reveal_right col s6">
             <p>
@@ -403,12 +402,12 @@
         </div>
     </div>
     <div id="year2" class="intro row">
-        <div class="container reveal_top col s12">
+        <div class="container reveal_top">
             <h3> Per feature analysis </h3>
         </div>
         <div class="container reveal_left col s6">
-            <img id="per_feature_img" src="figures/year_analysis_plots/single_year/acousticness_1960.png">
-            <div class="row">
+            <img class="picture" id="per_feature_img" src="figures/year_analysis_plots/single_year/acousticness_1960.png">
+            <div class="row" style="padding-left:10%;">
                 <div class="input-field col s4">
                     <select id="select_feature">
                         <option value="acousticness">acousticness</option>
@@ -425,7 +424,7 @@
                     </select>
                     <label>Select feature</label>
                 </div>
-                <div class="col s4">
+                <div class="col s3">
                     <p>
                         <input name="group1" type="radio" id="year_step" checked />
                         <label for="year_step">Year</label>
