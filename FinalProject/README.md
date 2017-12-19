@@ -14,9 +14,12 @@ Which country produces the "best" / "worst" songs ?
 Are there differences between countries ?     
 Are there correlations between year of release and ratings ?     
 Are there recurrent patterns depending on the period of the year ?
+How these tendencies evolve if we condition to the genre of songs?
+How genres have evolved over time?
+What is the evolution of hotness depending on different features?
 
 # Dataset
-We'll use the Million Song dataset. We'll simply download it, remove the Data folder (as we don't need the audio), therefore keeping only the Additional Files, and use Pandas to import the h5 and db files as DataFrames. We'll then filter out the columns we don't need (artist longitude latitude for example) and join the DataFrames to begin working on them. The size of the data will therefore be very manageable, as most of the 280GB is just audio.
+We'll use the Million Song dataset. We'll simply download it, remove the Data folder (as we don't need the precise analysis per track), therefore keeping only the Additional Files, and use Pandas to import the h5 and db files as DataFrames. We'll then filter out the columns we don't need (artist longitude latitude for example) and join the DataFrames to begin working on them. The size of the data will therefore be very manageable, as most of the 280GB is useless for us (we'll only need the additional files of the MSD).
 
 # A list of internal milestones up until project milestone 2
 | Week | To do |
@@ -24,8 +27,36 @@ We'll use the Million Song dataset. We'll simply download it, remove the Data fo
 | Week 1 | Get the data, import it, filter it |
 | Week 2 | Find correlations for ratings |
 | Week 3 | Find correlations for countries |
-| Week 4 | ??? |
+| Week 4 | Complete Milestone 2 |
+| Week 5 | Begin the datastory structure |
+| Week 6 | Work on the datastory and choose important things to show |
+| Week 7 | Write the comments of the data story |
 
-# Questions for TAs
--Should we focus more on only one/two questions ?    
--As there doesn't seem to be tags specific to tracks, we'll use the artist tags for correlations. Would it be better to look at the mean "hotness" of each artist or apply the tags to the tracks and work with them ?     
+# Data analysis
+We extracted, enriched using Spotify and merged the data (see the readme in the data folder). As the data is biased (as read on MSD), it will probably be hard to reach any conclusion.
+
+# New plan for milestone 3
+- Forget about countries (biased dataset, not enough data)
+- Use ML (forest) to find features importance / General analysis of features
+- Continue working on year / genre analysis
+
+# Members contributions
+We all worked in parallel and cross checked our work. However each member of the group focused his work on one specific sub-analysis.
+- Quentin
+  - Dataset Cleaning
+  - Feature analysis section
+  - Coding the spotify api calls
+  - Most of the datastory coding and comments
+- Antoine
+  - Dataset Cleaning
+  - Genre analysis section
+  - Datasets merging
+  - Genre analysis part in datastory (comments and coding)
+- Guillaume
+  - Initial dataset exploration
+  - Help for spotify
+  - Year analysis section
+  - README
+  - Proofreading
+# Poster presentation
+We will work together to chose which figures and which results to present onto the poster. Quentin will do the presentation.
