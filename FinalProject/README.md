@@ -59,4 +59,4 @@ We all worked in parallel and cross checked our work. However each member of the
   - README
   - Proofreading
 # Poster presentation
-We will work together to chose which figures and which results to present onto the poster. Quentin will do the presentation.
+We will work together to choose which figures and which results we want to present on the poster.
