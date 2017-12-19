@@ -76,24 +76,14 @@
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Genre Analysis</div>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="#genre1"> What we have </a></li>
-                            <li><a href="#genre2"> What we lack </a></li>
-                            <li><a href="#genre3"> Spotify to the rescue </a></li>
-                            <li><a href="#genre4"> What we'll definitely lack </a></li>
-                        </ul>
-                    </div>
+                    <div class="collapsible-header"><a href="#genre1">Genre Analysis</a></div>
                 </li>
                 <li>
                     <div class="collapsible-header">Year Analysis</div>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="#year1"> What we have </a></li>
-                            <li><a href="#year2"> What we lack </a></li>
-                            <li><a href="#year3"> Spotify to the rescue </a></li>
-                            <li><a href="#year4"> What we'll definitely lack </a></li>
+                            <li><a href="#year1"> Year biais </a></li>
+                            <li><a href="#year2"> Per feature analysis </a></li>
                         </ul>
                     </div>
                 </li>
@@ -241,7 +231,7 @@
                 In fact, the Echo Nest API is dead because it was bought by spotify years ago, thus the Spotify API is the one replacing it. We were able to gather the missing features of MSD, and even more. By using get_feature, we were able to retrieve plenty new ones: accousticness, instrumentalness, valence, speechiness, ... (complete list <a href="https://developer.spotify.com/web-api/get-audio-features/">here</a>).
             </p>
             <p>
-                As a desperate try to complete the missing values for the year and the song_hotttnesss, we requested this datas too. Unfortunately, they werent accurate or better than the one already present (and spotify doesn't give genre for a song, but for the artist, which isn't relevant most of the time).
+                As a desperate attempt to complete the missing values for the year and the song_hotttnesss, we requested this datas too. Unfortunately, they werent accurate or better than the one already present, as they are linked to an album, usually not the first one to use this song. As for the genre, Spotify doesn't give genre for a song, but for the artist, which isn't relevant most of the time.
             </p>
         </div>
     </div>
@@ -263,6 +253,12 @@
             <p>
                 Let's start simple by going over a correlation between the feature. Obviously, we are interested in the first column, as its telling us if there are links between feature and the song_hotttnesss.
             </p>
+            <p>
+                We don't learn much from this graph at the first glance. We see a weak positive correlation with year, energy, loudness and a weak negative one with accousticness, valence. For the positive one, the loudness and energy correlations could be interpreted as people aren't fond of quiet song. The year correlation is related as how the song-hotttnesss is computed, as it decayed with time. The negative ones are linked to the comment about loudness/energy.
+            </p>
+            <p>
+                Let's note something about the definition of song_hotttnesss: it's a value that evolve with how popular is a song. Thus if we are in 2010, a song of 2010 has higher chance to have a higher song_hotttnesss than a song from 1970. This means that our work on the song_hotttnesss, if we achieve to show anything, will explain how to make a <b>popular</b> song, but not always a <b>good</b> one.
+            </p>
         </div>
     </div>
     <div id="feature2" class="intro row">
@@ -271,7 +267,10 @@
         </div>
         <div class="container reveal_right col s6">
             <p>
-                blablaba
+                Again, mostly weak correlation here. Maybe we can say that it's better to be a Pop-Rock song to have a higher song_hotttnesss. However, as explained in a next section (<a href="#genre1">Genre Analysis</a>), the genre aren't uniformly distributed on the dataset and we lack plenty of them anyway (coverage of around a fourth of the dataset).
+            </p>
+            <p>
+                Conclusion at this point, correlation only aren't enough to give any insight of how to make a popular song.
             </p>
         </div>
         <div class="container reveal_left col s6">
@@ -293,10 +292,12 @@
     </div>
     <!-- FEATURE SECTION END -->
     <!-- GENRE SECTION START -->
-    <div id="genre1" class="intro row">
+    <div id="genre0" class="intro_title row">
         <div class="container reveal_top col s12">
             <h2> Genre Analysis </h2>
         </div>
+    </div>
+    <div id="genre1" class="intro row">
         <div class="container col s6 genre_primary" style='overflow-y: scroll; height:80%;'>
             <div id="genre_primary_all">
                 <h2>How Does It Work?</h2>
@@ -341,12 +342,17 @@
     </div>
     <!-- GENRE SECTION END -->
     <!-- YEAR SECTION START -->
-    <div id="year1" class="intro row">
+    <div id="year0" class="intro_title row">
         <div class="container reveal_top col s12">
             <h2> Year Analysis </h2>
         </div>
+    </div>
+    <div id="year1" class="intro row">
+        <div class="container reveal_top col s12">
+            <h3> Year biais </h3>
+        </div>
         <div class="container reveal_left col s6">
-            <!-- Samples per year image here -->
+            <img src="../year_analysis_plots/samples_per_year.png">
         </div>
         <div class="container reveal_right col s6">
             <p>
@@ -356,7 +362,7 @@
     </div>
     <div id="year2" class="intro row">
         <div class="container reveal_top col s12">
-            <h2> Per feature analysis </h2>
+            <h3> Per feature analysis </h3>
         </div>
         <div class="container reveal_left col s6">
             <img id="per_feature_img" src="../year_analysis_plots/single_year/acousticness_1960.png">
@@ -377,10 +383,6 @@
                     </select>
                     <label>Select feature</label>
                 </div>
-                <div class="input-field col s4">
-                    <input id="year_to_display" type="number" value="1960" min="1960" max="2010" step="1">
-                    <label for="year_to_display">Year/Decade to display</label>
-                </div>
                 <div class="col s4">
                     <p>
                         <input name="group1" type="radio" id="year_step" checked />
@@ -390,6 +392,10 @@
                         <input name="group1" type="radio" id="decade_step" />
                         <label for="decade_step">Decade</label>
                     </p>
+                </div>
+                <div class="input-field col s4">
+                    <input id="year_to_display" type="number" value="1960" min="1960" max="2010" step="1">
+                    <label for="year_to_display">Year/Decade to display</label>
                 </div>
             </div>
         </div>
@@ -433,7 +439,7 @@
     <!-- SMALL DATASET SECTION START -->
     <div id="conclusion1" class="intro row">
         <div class="container reveal_top col s12">
-            <h2> Conclusion </h2>
+            <h2> small dataset </h2>
         </div>
         <div class="container reveal_left col s6">
             <img src="https://img.discogs.com/D2mPkkAxhmT_PWc86ecm0Qx8iuo=/fit-in/500x507/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-444840-1198782565.jpeg.jpg" / />
@@ -463,6 +469,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="js/genre_scripts.js"></script>
+    <script src="js/year_scripts.js"></script>
     <script>
     // JavaScript
     window.sr = ScrollReveal();
@@ -472,91 +479,6 @@
     //sr.reveal('.reveal_genres', {  });
     //sr.reveal('.left', {container: '.intro', origin: 'left'})
     //sr.reveal('.bar');
-    </script>
-    <script type="text/javascript">
-    function displayImg(feature, year, step) {
-
-        var folder = '';
-        if (step === "1") {
-            folder = 'single_year/' + feature + "_" + (year);
-        } else {
-            folder = 'decade/' + feature + "_" + (year) + "-" + (year + 10);
-        }
-
-        $('#per_feature_img').attr('src', '../year_analysis_plots/' + folder + ".png")
-    }
-
-    $(document).ready(function() {
-        $('select').material_select();
-
-        var currentFeat = "acousticness"
-        var currentStep = "1"
-        var currentYear = 1960
-
-
-        $("select")
-            .change(() => {
-                var str = "";
-                $("#select_feature option:selected").each(function() {
-                    str += $(this).text() + " ";
-                });
-
-                $('#' + currentFeat + "_text").attr("style", "display:none;");
-                currentFeat = str.replace(" ", "_").trim();
-                $('#' + currentFeat + "_text").attr("style", "display:block;");
-
-                displayImg(currentFeat, currentYear, currentStep);
-            })
-
-        $('#year_step').click(function() {
-            if ($(this).is(':checked') && currentStep == "10") {
-                currentStep = "1";
-                $('#year_to_display').attr("step", "1");
-                $('#year_to_display').attr("max", "2010");
-
-                currentYear = 1960;
-                $('#year_to_display').val(currentYear);
-
-                displayImg(currentFeat, currentYear, currentStep);
-
-            }
-        });
-
-        $('#decade_step').click(function() {
-            if ($(this).is(':checked') && currentStep == "1") {
-                currentStep = "10";
-                $('#year_to_display').attr("step", "10");
-                $('#year_to_display').attr("max", "2009");
-
-                currentYear = 1960;
-                $('#year_to_display').val(currentYear);
-
-                displayImg(currentFeat, currentYear, currentStep);
-
-            }
-        });
-
-        $('#year_to_display').change(function() {
-
-            var elem = $(this);
-            currentYear = parseInt(elem.val());
-
-            if (currentYear < 1960) {
-                currentYear = 1960;
-            } else if (currentYear > 2010 && currentStep == "1") {
-                currentYear = 2010;
-            } else if (currentYear > 2009 && currentStep == "10") {
-                currentYear = 2000;
-            } else if (currentYear % 10 != 0 && currentStep == "10") {
-                currentYear = currentYear - (currentYear % 10);
-            }
-
-            elem.val(currentYear);
-
-            displayImg(currentFeat, currentYear, currentStep);
-
-        });
-    });
     </script>
 </body>
 
